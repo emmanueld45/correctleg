@@ -1,0 +1,455 @@
+/** start of  smaller screen*/
+@media only screen and (max-width: 690px) {
+  .cart-modal-background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1050;
+    cursor: pointer;
+    display: none;
+  }
+
+  .cart-modal {
+    width: 90%;
+
+    position: fixed;
+    top: 100px;
+    left: 5%;
+    background-color: white;
+    border-radius: 5px;
+    z-index: 1100;
+    display: none;
+  }
+
+  .cart-modal-close-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: crimson;
+    color: white;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+
+  .item-exist-modal-background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    cursor: pointer;
+    display: none;
+  }
+
+  .item-exist-modal {
+    width: 80%;
+
+    position: fixed;
+    top: 100px;
+    left: 10%;
+    background-color: white;
+    border-radius: 20px;
+    z-index: 1100;
+    display: none;
+  }
+
+  .item-exist-modal-close-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: crimson;
+    color: white;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+
+  .cart-item-box-container {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: ;
+  }
+
+  .cart-item-header {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    color: black;
+  }
+  .cart-item-box {
+    width: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+    margin-bottom: 10px;
+    background-color: ;
+    border-radius: 0px 0px 5px 5px;
+  }
+
+  .cart-item-box-left {
+    width: 40%;
+    padding: 5px;
+  }
+
+  .cart-item-box-right {
+    width: 60%;
+    padding: 10px;
+  }
+
+  .cart-item-box-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .cart-item-price {
+    font-weight: 600;
+    color: crimson;
+    font-size: 15px;
+  }
+
+  .cart-item-price-sign {
+    font-weight: 600;
+    color: crimson;
+    font-size: 15px;
+  }
+
+  .cart-checkout-btn {
+    width: 90%;
+    padding: 10px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .cart-continue-btn {
+    width: 90%;
+    padding: 10px;
+    background-color: white;
+    color: crimson;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+
+  .cart-item-exist-title {
+    width: 100%;
+    padding: 10px;
+    color: black;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  .cart-item-exist-icon {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 40px;
+    color: grey;
+  }
+
+  .cart-item-exist-checkout-btn {
+    width: 80%;
+    padding: 10px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .cart-item-exist-btn {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    background-color: white;
+    border-radius: 3px;
+    color: crimson;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .shopping-basket-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    position: fixed;
+    bottom: 27px;
+    left: 15px;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+    display: none !important;
+  }
+
+  .shopping-basket-btn i {
+    font-size: 20px;
+  }
+
+  .shopping-basket-btn-value {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: white;
+    color: crimson;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    font-size: 13px;
+    padding: 0px;
+    text-align: center;
+  }
+}
+
+/** end of smaller screen **/
+
+/*********************************************************/
+
+/***********************************************************/
+/** start of bigger screen*/
+@media only screen and (min-width: 690px) {
+  .cart-modal-background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    cursor: pointer;
+    display: none;
+  }
+
+  .cart-modal {
+    width: 50%;
+
+    position: fixed;
+    top: 100px;
+    left: 25%;
+    background-color: white;
+    border-radius: 5px;
+    z-index: 2100;
+    display: none;
+  }
+
+  .cart-modal-close-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: crimson;
+    color: white;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+
+  .item-exist-modal-background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    cursor: pointer;
+    display: none;
+  }
+
+  .item-exist-modal {
+    width: 30%;
+
+    position: fixed;
+    top: 100px;
+    left: 30%;
+    background-color: white;
+    border-radius: 10px;
+    z-index: 1100;
+    display: none;
+  }
+
+  .item-exist-modal-close-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: crimson;
+    color: white;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+  }
+
+  .cart-item-box-container {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: ;
+  }
+
+  .cart-item-header {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+  }
+  .cart-item-box {
+    width: 100%;
+
+    display: flex;
+    flex-flow: row nowrap;
+    margin-bottom: 10px;
+    background-color: ;
+    border-radius: 0px 0px 5px 5px;
+  }
+
+  .cart-item-box-left {
+    width: 40%;
+    padding: 10px;
+    background-color: white;
+  }
+
+  .cart-item-box-right {
+    width: 60%;
+    padding: 10px;
+  }
+
+  .cart-item-box-img {
+    width: 130px;
+    height: 130px;
+  }
+
+  .cart-item-name {
+    font-size: 19px;
+  }
+
+  .cart-item-price {
+    font-weight: 600;
+    color: crimson;
+    font-size: 18px;
+  }
+
+  .cart-item-price-sign {
+    font-weight: 600;
+    color: crimson;
+    font-size: 18px;
+  }
+  .cart-checkout-btn {
+    width: 90%;
+    padding: 10px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+
+  .cart-continue-btn {
+    width: 90%;
+    padding: 10px;
+    background-color: white;
+    color: crimson;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+
+  .cart-item-exist-title {
+    width: 100%;
+    padding: 10px;
+    color: black;
+    font-size: 21px;
+    margin-bottom: 10px;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: 600;
+  }
+
+  .cart-item-exist-icon {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    font-size: 50px;
+    color: grey;
+  }
+
+  .cart-item-exist-checkout-btn {
+    width: 80%;
+    padding: 10px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+
+  .cart-item-exist-btn {
+    width: 80%;
+    padding: 10px;
+    border: none;
+    background-color: white;
+    border-radius: 3px;
+    color: crimson;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .shopping-basket-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: crimson;
+    color: white;
+    border: none;
+    position: fixed;
+    bottom: 27px;
+    left: 15px;
+    z-index: 1000;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  .shopping-basket-btn i {
+    font-size: 20px;
+  }
+
+  .shopping-basket-btn-value {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: white;
+    color: crimson;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    font-size: 13px;
+    padding: 0px;
+    text-align: center;
+  }
+}
+
+/** end of bigger screen **/

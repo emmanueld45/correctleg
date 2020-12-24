@@ -1,0 +1,886 @@
+/** start of  smaller screen*/
+@media only screen and (max-width: 690px) {
+  /*** PRODUCT COMPONENT START ***/
+  .product-component {
+    width: 100%;
+    background-color: #e8e8e8;
+    padding: 10px 10px;
+  }
+
+  .product-component .component-title {
+    width: 100%;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    padding: 10px 15px;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .product-component .component-container {
+    width: 100%;
+    background-color: white;
+    padding: 10px 5px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .product-component .component-container .box {
+    width: 46%;
+    display: block;
+    background-color: white;
+    /* box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1); */
+    margin-bottom: 10px;
+    padding: 5px 5px;
+    transition: 0.3s ease;
+    position: relative;
+    margin-right: 10px;
+  }
+
+  .product-component .component-container .box .label {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    padding: 5px 7px;
+    background-color: crimson;
+    color: white;
+    border-radius: 0px 100px 100px 0px;
+    z-index: 200;
+    font-size: 11px;
+  }
+
+  .product-component .component-container .box:hover {
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .product-component .component-container .box .centered-div {
+    background-repeat: no-repeat;
+    background-image: 
+        /* layer 2: avatar */
+        /* white circle with 16px radius */ radial-gradient(
+        circle 16px,
+        white 99%,
+        transparent 0
+      ),
+      /* layer 1: title */ /* white rectangle with 40px height */
+        linear-gradient(white 0px, transparent 0),
+      /* layer 0: card bg */ /* gray rectangle that covers whole element */
+        linear-gradient(#eee 100%, transparent 0);
+    width: 100%;
+    height: 130px;
+  }
+  .product-component .component-container .box .centered-div img {
+    width: 100%;
+    height: auto;
+    /* object-fit: cover; */
+    /* display: none; */
+  }
+
+  .product-component .component-container .box .product-name {
+    width: 100%;
+    font-size: 15px;
+    color: #111;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .product-component .component-container .box .stars-container {
+    width: 100%;
+  }
+
+  .product-component .component-container .box .stars-container .star {
+    font-size: 11px;
+    color: grey;
+    display: inline-block;
+  }
+
+  .product-component .component-container .box .stars-container .star.active {
+    color: orange;
+  }
+  .product-component .component-container .box .product-price {
+    width: 100%;
+  }
+
+  .product-component .component-container .box .product-price .new-price {
+    font-weight: 600;
+    font-size: 16px;
+    color: crimson;
+  }
+
+  .product-component .component-container .box .product-price .old-price {
+    font-size: 15x;
+    color: rgb(87, 82, 82);
+    text-decoration: line-through;
+  }
+  /*** PRODUCT COMPONENT END ***/
+
+  /*** CAROUSEL PRODUCT COMPONENT START ***/
+  .carousel-product-component {
+    width: 100%;
+    background-color: #e8e8e8;
+    padding: 10px 10px;
+  }
+
+  .carousel-product-component .component-title {
+    width: 100%;
+    background-color: white;
+    color: black;
+    font-size: 16px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    padding: 10px 10px;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .carousel-product-component .component-container {
+    width: 100%;
+    background-color: white;
+    padding: 10px 10px;
+  }
+
+  .carousel-product-component .component-container .box {
+    width: 150px;
+    display: block;
+    background-color: white;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+    padding: 30px 15px;
+    transition: 0.3s ease;
+    position: relative;
+  }
+
+  .carousel-product-component .component-container .box .label {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    padding: 5px 7px;
+    background-color: crimson;
+    color: white;
+    border-radius: 0px 100px 100px 0px;
+    z-index: 200;
+    font-size: 11px;
+  }
+
+  .carousel-product-component .component-container .box:hover {
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .carousel-product-component .component-container .box .centered-div {
+    background-repeat: no-repeat;
+    background-image: 
+      /* layer 2: avatar */
+      /* white circle with 16px radius */ radial-gradient(
+        circle 16px,
+        white 99%,
+        transparent 0
+      ),
+      /* layer 1: title */ /* white rectangle with 40px height */
+        linear-gradient(white 0px, transparent 0),
+      /* layer 0: card bg */ /* gray rectangle that covers whole element */
+        linear-gradient(#eee 100%, transparent 0);
+    width: 100%;
+    height: 130px;
+  }
+
+  .carousel-product-component .component-container .box .centered-div img {
+    width: 100%;
+    min-height: 120px;
+    /* object-fit: cover; */
+    /* display: none; */
+  }
+
+  .carousel-product-component .component-container .box .product-name {
+    width: 100%;
+    font-size: 15px;
+    color: #111;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .carousel-product-component .component-container .box .stars-container {
+    width: 100%;
+  }
+
+  .carousel-product-component .component-container .box .stars-container .star {
+    font-size: 11px;
+    color: grey;
+    display: inline-block;
+  }
+
+  .carousel-product-component
+    .component-container
+    .box
+    .stars-container
+    .star.active {
+    color: orange;
+  }
+  .carousel-product-component .component-container .box .product-price {
+    width: 100%;
+  }
+
+  .carousel-product-component
+    .component-container
+    .box
+    .product-price
+    .new-price {
+    font-weight: 600;
+    font-size: 17px;
+    color: crimson;
+  }
+
+  .carousel-product-component
+    .component-container
+    .box
+    .product-price
+    .old-price {
+    font-size: 14px;
+    color: rgb(87, 82, 82);
+    text-decoration: line-through;
+  }
+  /*** CAROUSEL PRODUCT COMPONENT END ***/
+
+  /*** DOUBLE ADS COMPONENT START ***/
+  .double-ads-component {
+    width: 100%;
+    background-color: #e8e8e8;
+    padding: 10px 10px;
+  }
+
+  .double-ads-component .ads-container {
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    flex-flow: row wrap;
+  }
+
+  .double-ads-component .ads-container .row1 {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .double-ads-component .ads-container .row1 a img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-radius: 7px;
+    object-fit: cover;
+  }
+
+  .double-ads-component .ads-container .row2 {
+    width: 100%;
+  }
+
+  .double-ads-component .ads-container .row2 a img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-radius: 7px;
+    object-fit: cover;
+  }
+  /*** DOUBLE ADS COMPONENT END ***/
+
+  /*** PAGEINATION COMPONENT START ***/
+  .pagination-component {
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    padding: 5px;
+  }
+
+  .pagination-component .prev {
+    color: grey;
+    font-size: 13px;
+    font-weight: 500;
+    float: left;
+  }
+
+  .pagination-component .page-count {
+    color: grey;
+    font-size: 13px;
+  }
+
+  .pagination-component .next {
+    color: crimson;
+    float: right;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  /*** PAGINATION COMPONENT END ***/
+
+  /*** CLICK LOADER START ***/
+  .click-loader {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    display: none;
+  }
+
+  .click-loader img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+  /*** CLICK LOADER END ***/
+
+  /*** RATING MODAL START ***/
+  .rating-component-modal {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+  }
+
+  .rating-component-modal .box {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: white;
+  }
+
+  .rating-component-modal .box .header {
+    width: 100%;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .rating-component-modal .box .header .close-rating-component-modal-btn {
+    font-size: 20px;
+    color: lightgrey;
+  }
+
+  .rating-component-modal .box .body {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .rating-component-modal .box .body .centered-div img {
+    width: 100%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    object-fit: cover;
+  }
+
+  .rating-component-modal .box .body .message-title {
+    width: 100%;
+    text-align: center;
+    color: #111;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .rating-component-modal .box .body .centered-div .rating-component-star {
+    font-size: 30px;
+    color: lightgrey;
+    margin-right: 13px;
+  }
+
+  .rating-component-modal
+    .box
+    .body
+    .centered-div
+    .rating-component-star.active {
+    color: orange;
+  }
+
+  .rating-component-modal .box .body .rating-message {
+    width: 100%;
+    color: lightgrey;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .rating-component-modal .box .body .centered-div .rating-comment-field {
+    width: 270px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #eee;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    font-size: 17px;
+    color: grey;
+  }
+
+  .rating-component-modal .box .body .centered-div .rating-submit-btn {
+    width: 200px;
+    padding: 15px;
+    border: none;
+    border-radius: 100px;
+    background-color: crimson;
+    color: white;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 19px;
+    font-weight: 600;
+  }
+  /*** RATING MODAL END ***/
+}
+
+/** end of smaller screen **/
+/*************/
+/*************/
+/*************/
+/*************/
+/*************/
+/*************/
+/*************/
+/** start of bigger screen*/
+@media only screen and (min-width: 690px) {
+  /*** PRODUCT COMPONENT START ***/
+  .product-component {
+    width: 100%;
+    background-color: #e8e8e8;
+    padding: 10px 20px;
+  }
+
+  .product-component .component-title {
+    width: 100%;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    padding: 10px 10px;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .product-component .component-container {
+    width: 100%;
+    background-color: white;
+    padding: 10px 10px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+  }
+
+  .product-component .component-container .box {
+    width: 200px;
+    display: block;
+    background-color: white;
+    /* box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1); */
+    margin-bottom: 10px;
+    /* padding: 30px 15px; */
+    padding: 10px 5px;
+    transition: 0.3s ease;
+    position: relative;
+    margin-right: 50px;
+    /* border: 1px solid #eee; */
+  }
+
+  .product-component .component-container .box .label {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    padding: 5px 7px;
+    background-color: crimson;
+    color: white;
+    border-radius: 0px 100px 100px 0px;
+    z-index: 200;
+    font-size: 11px;
+  }
+
+  .product-component .component-container .box:hover {
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .product-component .component-container .box .centered-div {
+    background-repeat: no-repeat;
+    background-image: 
+        /* layer 2: avatar */
+        /* white circle with 16px radius */ radial-gradient(
+        circle 16px,
+        white 99%,
+        transparent 0
+      ),
+      /* layer 1: title */ /* white rectangle with 40px height */
+        linear-gradient(white 0px, transparent 0),
+      /* layer 0: card bg */ /* gray rectangle that covers whole element */
+        linear-gradient(#eee 100%, transparent 0);
+    width: 100%;
+    height: 170px;
+  }
+  .product-component .component-container .box .centered-div img {
+    width: 100%;
+    height: auto;
+    /* object-fit: cover; */
+    /* display: none; */
+  }
+
+  .product-component .component-container .box .product-name {
+    width: 100%;
+    font-size: 17px;
+    color: #111;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .product-component .component-container .box .stars-container {
+    width: 100%;
+  }
+
+  .product-component .component-container .box .stars-container .star {
+    font-size: 12px;
+    color: grey;
+    display: inline-block;
+  }
+
+  .product-component .component-container .box .stars-container .star.active {
+    color: orange;
+  }
+  .product-component .component-container .box .product-price {
+    width: 100%;
+  }
+
+  .product-component .component-container .box .product-price .new-price {
+    font-weight: 600;
+    font-size: 19px;
+    color: crimson;
+  }
+
+  .product-component .component-container .box .product-price .old-price {
+    font-size: 16px;
+    color: rgb(87, 82, 82);
+    text-decoration: line-through;
+  }
+  /*** PRODUCT COMPONENT END ***/
+
+  /*** CAROUSEL PRODUCT COMPONENT START ***/
+  .carousel-product-component {
+    width: 100%;
+    background-color: #e8e8e8;
+    padding: 10px 20px;
+  }
+
+  .carousel-product-component .component-title {
+    width: 100%;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    padding: 10px 10px;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .carousel-product-component .component-container {
+    width: 100%;
+    background-color: white;
+    padding: 10px 10px;
+  }
+
+  .carousel-product-component .component-container .box {
+    width: 200px;
+    display: block;
+    background-color: white;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+    padding: 30px 15px;
+    transition: 0.3s ease;
+    position: relative;
+  }
+
+  .carousel-product-component .component-container .box .label {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    padding: 5px 7px;
+    background-color: crimson;
+    color: white;
+    border-radius: 0px 100px 100px 0px;
+    z-index: 200;
+    font-size: 11px;
+  }
+
+  .carousel-product-component .component-container .box:hover {
+    box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.2);
+  }
+
+  .carousel-product-component .component-container .box .centered-div {
+    background-repeat: no-repeat;
+    background-image: 
+      /* layer 2: avatar */
+      /* white circle with 16px radius */ radial-gradient(
+        circle 16px,
+        white 99%,
+        transparent 0
+      ),
+      /* layer 1: title */ /* white rectangle with 40px height */
+        linear-gradient(white 20px, transparent 0),
+      /* layer 0: card bg */ /* gray rectangle that covers whole element */
+        linear-gradient(#eee 100%, transparent 0);
+    width: 100%;
+    height: 150px;
+  }
+  .carousel-product-component .component-container .box .centered-div img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    /* display: none; */
+  }
+
+  .carousel-product-component .component-container .box .product-name {
+    width: 100%;
+    font-size: 17px;
+    color: #111;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+
+  .carousel-product-component .component-container .box .stars-container {
+    width: 100%;
+  }
+
+  .carousel-product-component .component-container .box .stars-container .star {
+    font-size: 12px;
+    color: grey;
+    display: inline-block;
+  }
+
+  .carousel-product-component
+    .component-container
+    .box
+    .stars-container
+    .star.active {
+    color: orange;
+  }
+  .carousel-product-component .component-container .box .product-price {
+    width: 100%;
+  }
+
+  .carousel-product-component
+    .component-container
+    .box
+    .product-price
+    .new-price {
+    font-weight: 600;
+    font-size: 19px;
+    color: crimson;
+  }
+
+  .carousel-product-component
+    .component-container
+    .box
+    .product-price
+    .old-price {
+    font-size: 16px;
+    color: rgb(87, 82, 82);
+    text-decoration: line-through;
+  }
+  /*** CAROUSEL PRODUCT COMPONENT END ***/
+
+  /*** DOUBLE ADS COMPONENT START ***/
+  .double-ads-component {
+    width: 100%;
+    background-color: #e8e8e8;
+    padding: 10px 20px;
+  }
+
+  .double-ads-component .ads-container {
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  .double-ads-component .ads-container .row1 {
+    width: 50%;
+    margin-right: 10px;
+  }
+
+  .double-ads-component .ads-container .row1 a img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-radius: 7px;
+    object-fit: cover;
+  }
+
+  .double-ads-component .ads-container .row2 {
+    width: 50%;
+  }
+
+  .double-ads-component .ads-container .row2 a img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-radius: 7px;
+    object-fit: cover;
+  }
+  /*** DOUBLE ADS COMPONENT END ***/
+
+  /*** PAGEINATION COMPONENT START ***/
+  .pagination-component {
+    width: 100%;
+    text-align: center;
+    height: 40px;
+    padding: 5px;
+  }
+
+  .pagination-component .prev {
+    color: grey;
+    font-size: 14px;
+    font-weight: 500;
+    float: left;
+  }
+
+  .pagination-component .page-count {
+    color: grey;
+    font-size: 14px;
+  }
+
+  .pagination-component .next {
+    color: crimson;
+    float: right;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  /*** PAGINATION COMPONENT END ***/
+
+  /*** CLICK LOADER START ***/
+  .click-loader {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    display: none;
+  }
+
+  .click-loader img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+  }
+  /*** CLICK LOADER END ***/
+
+  /*** RATING MODAL START ***/
+  .rating-component-modal {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+  }
+
+  .rating-component-modal .box {
+    margin-top: 50px;
+    width: 500px;
+    height: 500px;
+    position: relative;
+    background-color: white;
+    border-radius: 3px;
+  }
+
+  .rating-component-modal .box .header {
+    width: 100%;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+
+  .rating-component-modal .box .header .close-rating-component-modal-btn {
+    font-size: 20px;
+    color: lightgrey;
+    cursor: pointer;
+  }
+
+  .rating-component-modal .box .body {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .rating-component-modal .box .body .centered-div img {
+    width: 100%;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    object-fit: cover;
+  }
+
+  .rating-component-modal .box .body .message-title {
+    width: 100%;
+    text-align: center;
+    color: #111;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .rating-component-modal .box .body .centered-div .rating-component-star {
+    font-size: 30px;
+    color: lightgrey;
+    margin-right: 13px;
+    cursor: pointer;
+  }
+
+  .rating-component-modal
+    .box
+    .body
+    .centered-div
+    .rating-component-star.active {
+    color: orange;
+  }
+
+  .rating-component-modal .box .body .rating-message {
+    width: 100%;
+    color: lightgrey;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .rating-component-modal .box .body .centered-div .rating-comment-field {
+    width: 300px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #eee;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 17px;
+    color: grey;
+  }
+
+  .rating-component-modal .box .body .centered-div .rating-submit-btn {
+    width: 200px;
+    padding: 15px;
+    border: none;
+    border-radius: 100px;
+    background-color: crimson;
+    color: white;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 19px;
+    font-weight: 600;
+  }
+  /*** RATING MODAL END ***/
+}
+
+/** end of bigger screen **/
