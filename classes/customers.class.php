@@ -141,6 +141,16 @@ class Customer
         return $row;
     }
 
+    public function getShippingAddressDetail($customer_id, $detail)
+    {
+        global $db;
+
+        $result = $db->setQuery("SELECT * FROM shippingaddress WHERE customerid='$customer_id';");
+        $row = mysqli_fetch_assoc($result);
+
+        return $row[$detail];
+    }
+
     public function haveSavedItem($customer_id, $item_id)
     {
         global $db;

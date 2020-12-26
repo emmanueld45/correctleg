@@ -783,6 +783,7 @@ $item_id = $_GET['item_id'];
                             <table>
                                 <thead>
                                     <th style="text-align:left;">Item</th>
+                                    <th>Size</th>
                                     <th>Quantity</th>
                                     <th>Unit cost</th>
                                     <th>Line total</th>
@@ -790,6 +791,7 @@ $item_id = $_GET['item_id'];
                                 <tbody>
                                     <tr>
                                         <td style="text-align:left;"><?php echo $product->getDetail($item_id, "name"); ?></td>
+                                        <td><?php echo $row['size']; ?></td>
                                         <td><?php echo $row['howmany']; ?></td>
                                         <td> <span>&#8358</span><?php echo number_format($row['price']); ?></td>
                                         <td><span>&#8358</span><?php echo number_format($row['howmany'] * $row['price']); ?></td>
@@ -897,7 +899,7 @@ $item_id = $_GET['item_id'];
                                         <span class="detail">Name: <?php echo $row1['firstname'] . " " . $row1['lastname']; ?></span>
                                         <span class="detail">Phone: <?php echo $row1['phone']; ?></span>
                                         <?php
-                                        if ($order->getDetail($order_id, "deliverymethod") == "Door") {
+                                        if ($order->getDetail($order_id, "deliverymethod") == "Door step delivery") {
                                         ?>
                                             <h6><i>*Note: Door step delivery</i></h6>
                                             <span class="detail"><?php echo $row1['address1']; ?></span>
@@ -929,6 +931,7 @@ $item_id = $_GET['item_id'];
                             <table>
                                 <thead>
                                     <th style="text-align:left;">Item</th>
+                                    <th>Size</th>
                                     <th>Quantity</th>
                                     <th>Unit cost</th>
                                     <th>Line total</th>
@@ -936,6 +939,7 @@ $item_id = $_GET['item_id'];
                                 <tbody>
                                     <tr>
                                         <td style="text-align:left;"><?php echo $product->getDetail($item_id, "name"); ?></td>
+                                        <td><?php echo $row['size']; ?></td>
                                         <td><?php echo $row['howmany']; ?></td>
                                         <td> <span>&#8358</span><?php echo number_format($row['price']); ?></td>
                                         <td><span>&#8358</span><?php echo number_format($row['howmany'] * $row['price']); ?></td>

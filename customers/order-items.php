@@ -7,6 +7,7 @@ include '../classes/database.class.php';
 include '../classes/admin.class.php';
 include '../classes/products.class.php';
 include '../classes/customers.class.php';
+include '../classes/sellers.class.php';
 include '../classes/orders.class.php';
 
 if (!isset($_SESSION['id'])) {
@@ -22,9 +23,33 @@ $orderid = $_GET['orderid'];
 if (isset($_GET['remove_item']) and isset($_GET['orderid']) and isset($_GET['item_id'])) {
     $item_id = mysqli_real_escape_string($db->conn, $_GET['item_id']);
     $order_id = mysqli_real_escape_string($db->conn, $_GET['orderid']);
-    $db->setQuery("DELETE FROM orderproducts WHERE productid='$item_id';");
 
-    $product->updateDetail($item_id, "howmany", 1, "+");
+    $result = $db->setQuery("SELECT * FROM orderproducts WHERE orderid='$order_id' AND productid='$item_id';");
+    $row = mysqli_fetch_assoc($result);
+
+    // add the quantity back to ite respective sections
+    if ($row['promotion_id'] != "empty" and $product->promotionExist($row['promotion_id'])) {
+        if ($product->productHaveVariation($item_id)) {
+            $product->increaseVariationStock($item_id, $row['size'], $row['howmany']);
+        }
+        $product->increasePromotionStock($item_id, $row['promotion_id'], $row['howmany']);
+    } else {
+        if ($product->productHaveVariation($item_id)) {
+            $product->increaseVariationStock($item_id, $row['size'], $row['howmany']);
+        } else {
+            $product->updateDetail($item_id, "howmany", $row['howmany'], "+");
+        }
+    }
+
+    $total_price = $row['price'] * $row['howmany'];
+    $seller_id = $row['sellerid'];
+    $commission = $admin->calcItemCommission($row['price']) * $row['howmany'];
+    $amount_remaining = $total_price - $commission;
+    $seller->updateDetail($seller_id, "pendingbalance", $amount_remaining, "-");
+    $admin->updateAdminDetail("pendingbalance", $commission, "-");
+
+    $db->setQuery("DELETE FROM orderproducts WHERE orderid='$order_id' AND productid='$item_id';");
+
     if ($order->getNumTotalProductsOrdered($order_id) == 0) {
         $db->setQuery("DELETE FROM orders WHERE orderid='$order_id';");
         $admin->goToPage("my-orders", "order_cancelled");

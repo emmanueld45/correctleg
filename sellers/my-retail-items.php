@@ -11,6 +11,22 @@ include '../classes/orders.class.php';
 include '../classes/products.class.php';
 
 
+if (!isset($_SESSION['id'])) {
+    $admin->goToPage("login", "invalid_seller");
+}
+
+if (!$seller->sellerIsLoggedIn($_SESSION['id'])) {
+    $admin->goToPage("login", "invalid_seller");
+}
+
+if (isset($_GET['delete_item'])) {
+    $item_id = $_GET['item_id'];
+
+    $db->setQuery("DELETE FROM product WHERE uniqueid='$item_id';");
+    $admin->goToPage("my-retail-items", "item_deleted");
+}
+
+
 $sessionid = $_SESSION['id'];
 ?>
 
@@ -273,7 +289,11 @@ $sessionid = $_SESSION['id'];
         </div>
         <!-- header end -->
 
-
+        <?php
+        if (isset($_GET['item_deleted'])) {
+            echo "<div class='alert alert-danger'>Item deleted</div>";
+        }
+        ?>
         <!-- start of order container -->
         <div class="order-container">
             <?php
@@ -286,7 +306,7 @@ $sessionid = $_SESSION['id'];
             $previous_limits = ($page * $limit) - $limit;
 
 
-            $sql = "SELECT * FROM product WHERE sellerid='$sessionid' ORDER BY id DESC LIMIT $previous_limits, $limit;";
+            $sql = "SELECT * FROM product WHERE sellerid='$sessionid' ORDER BY id DESC;";
             $result = mysqli_query($conn, $sql);
             $numrows = mysqli_num_rows($result);
 
@@ -301,16 +321,24 @@ $sessionid = $_SESSION['id'];
                     <!-- box 1-->
                     <div class="order-box">
                         <div class="order-box-left">
-                            <img src="../<?php echo $row['image1']; ?>" class="order-img">
+                            <a href="../product?i=<?php echo $row['uniqueid']; ?>">
+                                <img src="../<?php echo $row['image1']; ?>" class="order-img">
+                            </a>
                         </div>
                         <div class="order-box-right">
-                            <span style="font-weight:600;font-size:17px;"><?php echo $product->shortenLength($row['name'], 17, "..."); ?> </span><br>
+                            <a href="../product?i=<?php echo $row['uniqueid']; ?>" style="color:inherit;text-decoration:none;">
+                                <span style="font-weight:600;font-size:17px;"><?php echo $product->shortenLength($row['name'], 17, "..."); ?> </span><br>
 
-                            <?php echo $product->getStars($row['uniqueid'], "<i class='fa fa-star' style='font-size:14px;color:orange;'></i>", "<i class='fa fa-star' style='font-size:14px;color:lightgrey;'></i>"); ?>
-                            <br>
+                                <?php echo $product->getStars($row['uniqueid'], "<i class='fa fa-star' style='font-size:14px;color:orange;'></i>", "<i class='fa fa-star' style='font-size:14px;color:lightgrey;'></i>"); ?>
+                                <br>
+                            </a>
                             <span style="color: crimson;font-size:17px;font-weight:600;"><span>&#8358</span><?php echo number_format($row['price']); ?></span>
-                            <a href="edit-retail-item?i=<?php echo $row['uniqueid']; ?>" style="color:red;float:right;font-size:15px;padding:10px;">edit</a>
-                            <a href="../product?i=<?php echo $row['uniqueid']; ?>" style="color:royalblue;float:right;font-size:15px;padding:10px;">view</a>
+                            <a href="edit-retail-item?i=<?php echo $row['uniqueid']; ?>" style="color:royalblue;float:right;font-size:15px;padding:10px;">edit</a>
+                            <?php
+                            if (!$product->productHaveBeenOrdered($row['uniqueid'])) {
+                                echo "<a class='delete-item-btn' item_id='" . $row['uniqueid'] . "' style='color:red;float:right;font-size:15px;padding:10px;'>delete</a>";
+                            }
+                            ?>
 
 
                         </div>
@@ -339,7 +367,9 @@ $sessionid = $_SESSION['id'];
         <!-- end of order container -->
 
         <div class="pagination-component">
-            <?php $product->getPagination($numrows, $limit, "my-retail-items?"); ?>
+            <?php
+            // $product->getPagination($numrows, $limit, "my-retail-items?");
+            ?>
         </div>
 
 
@@ -503,6 +533,12 @@ $sessionid = $_SESSION['id'];
             <div class="col-sm-8">
 
                 <div style="width:100%;padding:10px;font-weight:600;font-size:20px;">Retail ITEMS <i class="fa fa-heart" style="color:grey;"></i></div>
+
+                <?php
+                if (isset($_GET['item_deleted'])) {
+                    echo "<div class='alert alert-danger'>Item deleted</div>";
+                }
+                ?>
                 <!-- start of order container -->
                 <div class="order-container">
 
@@ -517,7 +553,7 @@ $sessionid = $_SESSION['id'];
                     $previous_limits = ($page * $limit) - $limit;
 
 
-                    $sql = "SELECT * FROM product WHERE sellerid='$sessionid' ORDER BY id DESC LIMIT $previous_limits, $limit;";
+                    $sql = "SELECT * FROM product WHERE sellerid='$sessionid' ORDER BY id DESC;";
                     $result = mysqli_query($conn, $sql);
                     $numrows = mysqli_num_rows($result);
 
@@ -528,16 +564,24 @@ $sessionid = $_SESSION['id'];
                             <!-- box 1-->
                             <div class="order-box">
                                 <div class="order-box-left">
-                                    <img src="../<?php echo $row['image1']; ?>" class="order-img">
+                                    <a href="../product?i=<?php echo $row['uniqueid']; ?>">
+                                        <img src="../<?php echo $row['image1']; ?>" class="order-img">
+                                    </a>
                                 </div>
                                 <div class="order-box-right">
-                                    <span style="font-weight:600;font-size:17px;"><?php echo $product->shortenLength($row['name'], 17, "..."); ?> </span><br>
+                                    <a href="../product?i=<?php echo $row['uniqueid']; ?>" style="color:inherit;text-decoration:none;">
+                                        <span style="font-weight:600;font-size:17px;"><?php echo $product->shortenLength($row['name'], 17, "..."); ?> </span><br>
 
-                                    <?php echo $product->getStars($row['uniqueid'], "<i class='fa fa-star' style='font-size:14px;color:orange;'></i>", "<i class='fa fa-star' style='font-size:14px;color:lightgrey;'></i>"); ?>
-                                    <br>
+                                        <?php echo $product->getStars($row['uniqueid'], "<i class='fa fa-star' style='font-size:14px;color:orange;'></i>", "<i class='fa fa-star' style='font-size:14px;color:lightgrey;'></i>"); ?>
+                                        <br>
+                                    </a>
                                     <span style="color: crimson;font-size:17px;font-weight:600;"><span>&#8358</span><?php echo number_format($row['price']); ?></span>
-                                    <a href="edit-retail-item?i=<?php echo $row['uniqueid']; ?>" style="color:red;float:right;font-size:15px;padding:10px;">edit</a>
-                                    <a href="../product?i=<?php echo $row['uniqueid']; ?>" style="color:royalblue;float:right;font-size:15px;padding:10px;">view</a>
+                                    <a href="edit-retail-item?i=<?php echo $row['uniqueid']; ?>" style="color:royalblue;float:right;font-size:15px;padding:10px;cursor:pointer;">edit</a>
+                                    <?php
+                                    if (!$product->productHaveBeenOrdered($row['uniqueid'])) {
+                                        echo "<a class='delete-item-btn' item_id='" . $row['uniqueid'] . "' style='color:red;float:right;font-size:15px;padding:10px;cursor:pointer;'>delete</a>";
+                                    }
+                                    ?>
 
 
                                 </div>
@@ -566,7 +610,9 @@ $sessionid = $_SESSION['id'];
                 </div>
                 <!-- end of order container -->
                 <div class="pagination-component">
-                    <?php $product->getPagination($numrows, $limit, "my-retail-items?"); ?>
+                    <?php
+                    //  $product->getPagination($numrows, $limit, "my-retail-items?"); 
+                    ?>
                 </div>
 
 
@@ -607,7 +653,12 @@ $sessionid = $_SESSION['id'];
     <script src="js/main.js"></script>
 
     <script>
-
+        $(".delete-item-btn").click(function() {
+            var item_id = $(this).attr("item_id");
+            if (confirm("Are you sure you want to delete this item?")) {
+                window.location.href = "my-retail-items?delete_item&item_id=" + item_id;
+            }
+        })
     </script>
 </body>
 

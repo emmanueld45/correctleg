@@ -1,5 +1,21 @@
 /** start of  smaller screen*/
 @media only screen and (max-width: 690px) {
+  /** SITE ALERT START ***/
+  .site-alert {
+    max-width: 80%;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    z-index: 3000;
+    top: 20%;
+    right: 10%;
+    font-size: 14px;
+    border-radius: 3px;
+    display: none;
+    text-align: center;
+  }
+  /*** SITE ALERT END ***/
   /*** PRODUCT COMPONENT START ***/
   .product-component {
     width: 100%;
@@ -443,6 +459,22 @@
 /*************/
 /** start of bigger screen*/
 @media only screen and (min-width: 690px) {
+  /** SITE ALERT START ***/
+  .site-alert {
+    max-width: 300px;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    position: fixed;
+    z-index: 3000;
+    top: 20%;
+    right: 40%;
+    font-size: 14px;
+    border-radius: 3px;
+    display: none;
+  }
+  /*** SITE ALERT END ***/
+
   /*** PRODUCT COMPONENT START ***/
   .product-component {
     width: 100%;

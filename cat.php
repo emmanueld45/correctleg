@@ -585,27 +585,29 @@ if ($item_is_for == "All" or $item_is_for == "Men" or $item_is_for == "Women" or
 
                         if ($product->productExist($main_item_array[$i])) {
                             $item_id = $main_item_array[$i];
+                            if ($product->itemIsAvailable($item_id)) {
                 ?>
-                            <div class="item-box">
-                                <div class="item-box-left">
-                                    <a href="product?i=<?php echo $item_id; ?>" style="color:inherit;">
-                                        <img data-src="<?php echo $product->getDetail($item_id, "image1"); ?>" class="item-images lazy-loaded-img">
-                                    </a>
+                                <div class="item-box">
+                                    <div class="item-box-left">
+                                        <a href="product?i=<?php echo $item_id; ?>" style="color:inherit;">
+                                            <img data-src="<?php echo $product->getDetail($item_id, "image1"); ?>" class="item-images lazy-loaded-img">
+                                        </a>
+                                    </div>
+                                    <div class="item-box-right">
+                                        <a href="product.php?i=<?php echo $item_id; ?>" style="color:inherit;">
+                                            <span style="font-weight:600;font-size:17px;"><?php echo $product->shortenName($product->getDetail($item_id, "name")); ?> </span><br>
+                                            <?php echo $product->getStars($item_id, "<i class='fa fa-star' style='color:orange;font-size:13px;'></i>", "<i class='fa fa-star' style='color:lightgrey;font-size:13px;'></i>") ?>
+                                            <br>
+
+                                        </a>
+
+                                        <span class="item-price"><span>&#8358</span><?php echo number_format($product->getDetail($item_id, "price")); ?> <span class='item-old-price'><span>&#8358</span><?php echo number_format($product->getDetail($item_id, "old_price")); ?></span></span>
+
+                                        <!-- <a href="product.php?i=<?php echo $item_id; ?>"><button class="btn btn-primary" style="float:right;">view</button></a> -->
+                                    </div>
                                 </div>
-                                <div class="item-box-right">
-                                    <a href="product.php?i=<?php echo $item_id; ?>" style="color:inherit;">
-                                        <span style="font-weight:600;font-size:17px;"><?php echo $product->shortenName($product->getDetail($item_id, "name")); ?> </span><br>
-                                        <?php echo $product->getStars($item_id, "<i class='fa fa-star' style='color:orange;font-size:13px;'></i>", "<i class='fa fa-star' style='color:lightgrey;font-size:13px;'></i>") ?>
-                                        <br>
-
-                                    </a>
-
-                                    <span class="item-price"><span>&#8358</span><?php echo number_format($product->getDetail($item_id, "price")); ?> <span class='item-old-price'><span>&#8358</span><?php echo number_format($product->getDetail($item_id, "old_price")); ?></span></span>
-
-                                    <!-- <a href="product.php?i=<?php echo $item_id; ?>"><button class="btn btn-primary" style="float:right;">view</button></a> -->
-                                </div>
-                            </div>
                 <?php
+                            }
                         }
                     }
                 } else {

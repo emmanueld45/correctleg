@@ -1,7 +1,6 @@
 <?php
 session_start();
 include 'dbconn.php';
-//include 'send_twilio_sms.php';
 include 'functions.php';
 
 include 'classes/database.class.php';
@@ -13,13 +12,33 @@ include 'classes/products.class.php';
 include 'classes/emails.class.php';
 
 
-if (!isset($_SESSION['payment_method'])  and !isset($_SESSION['cart'])) {
-    echo '<script>
-    window.location.href="./";
-    </script>';
+if (!isset($_SESSION['id'])) {
+    $admin->goToPage("customers/login", "invalid_checkout");
+} else if (!$customer->customerIsLoggedIn($_SESSION['id'])) {
+    $admin->goToPage("customers/login", "invalid_checkout");
 }
 
-echo "<h3>Please wait...</h3>";
+if (!isset($_COOKIE['cl_cart'])) {
+    $admin->goToPage("./", "invalid_checkout");
+} else {
+    $cart = json_decode($_COOKIE['cl_cart']);
+    if (count($cart) == 0) {
+        $admin->goToPage("./", "invalid_checkout");
+    }
+}
+
+// check if all items have available quantities for order
+$cart = json_decode($_COOKIE['cl_cart']);
+foreach ($cart as $item) {
+    $item = (array) $item;
+    $itemIsAvailable = $product->itemHaveSufficientQuantityForOrder($item['item_id'], $item['promotion_id'], $item['item_size'], $item['how_many']);
+    if ($itemIsAvailable['status'] != 'yes') {
+        $message = $itemIsAvailable['message'];
+        $admin->goToPage("cart", "item_unavailable=true&message=$message");
+        return;
+    }
+}
+
 if (isset($_SESSION['id']) and $customer->customerIsLoggedIn($_SESSION['id'])) {
     $customer_id = $_SESSION['id'];
 } else {
@@ -30,31 +49,23 @@ $rand = RAND(10000000, 99000000);
 $orderid = "cl-" . $rand;
 $_SESSION['order_id'] = $orderid;
 
-
-$delivery_method = $_SESSION['delivery_method'];
-if ($delivery_method == "Pickup") {
-    $delivery_station = $_SESSION['delivery_station'];
-    $pickup_station_address = get_pickup_station($_SESSION['delivery_station']);
-    $_SESSION['pickup_station_address'] = $pickup_station_address;
-}
-if (isset($_GET['paidonline'])) {
-    $payment_method = "onlinepayment";
+if (isset($_SESSION['pay_online'])) {
+    $payment_method = "pay online";
 } else {
-    $payment_method = $_SESSION['payment_method'];
+    $payment_method = "pay on delivery";
 }
 
+$firstname = mysqli_real_escape_string($db->conn, $customer->getShippingAddressDetail($customer_id, "firstname"));
+$lastname =  mysqli_real_escape_string($db->conn, $customer->getShippingAddressDetail($customer_id, "lastname"));
+$phone =  mysqli_real_escape_string($db->conn, $customer->getShippingAddressDetail($customer_id, "phone"));
+$additionalphone =  mysqli_real_escape_string($db->conn, $customer->getShippingAddressDetail($customer_id, "additionalphone"));
+$email =  mysqli_real_escape_string($db->conn, $customer->getShippingAddressDetail($customer_id, "email"));
+$region =  mysqli_real_escape_string($db->conn, $customer->getShippingAddressDetail($customer_id, "region"));
+$address1 =  mysqli_real_escape_string($db->conn, $customer->getShippingAddressDetail($customer_id, "address1"));
+$address2 =  mysqli_real_escape_string($db->conn, $customer->getShippingAddressDetail($customer_id, "address2"));
 
-$firstname = $_SESSION['order_firstname'];
-$lastname = $_SESSION['order_lastname'];
-$phone = $_SESSION['order_phone'];
-$additionalphone = $_SESSION['order_additionalphone'];
-$email = $_SESSION['order_email'];
-$region = $_SESSION['order_region'];
-$address1 = $_SESSION['order_address1'];
-$address2 = $_SESSION['order_address2'];
-
-$shipping_fee = $_SESSION['order_shipping_fee'];
-
+$shipping_fee = 0;
+$delivery_method = "Door step delivery";
 
 $status = "Active";
 $time = time();
@@ -71,30 +82,15 @@ $c = date("i A");
 $mydate = getdate(date("U"));
 $time_created = "$mydate[weekday], $mydate[month] $mydate[mday], $mydate[year]";
 
-
-if (isset($_SESSION['coupon_amount'])) {
-    $coupon_amount = $_SESSION['coupon_amount'];
-} else {
-    $coupon_amount = 0;
-}
-$total_amount = $_SESSION['cart_total'];
-
-
-
-
-
+$coupon_amount = 0;
 
 
 
 
 
 // insert into orders table start
-$sql = "INSERT INTO orders (orderid, customerid, deliverymethod, paymentmethod, status, time, date, timeview, time_created, adminnew, new, shipping_fee, coupon_amount) VALUES ('$orderid', '$customer_id', '$delivery_method', '$payment_method', '$status', '$time', '$date', '$timeview', '$time_created', '$adminnew', '$new', '$shipping_fee', '$coupon_amount');";
-$send_order = mysqli_query($conn, $sql);
-
+$send_order = $db->setQuery("INSERT INTO orders (orderid, customerid, deliverymethod, paymentmethod, status, time, date, timeview, time_created, adminnew, new, shipping_fee, coupon_amount) VALUES ('$orderid', '$customer_id', '$delivery_method', '$payment_method', '$status', '$time', '$date', '$timeview', '$time_created', '$adminnew', '$new', '$shipping_fee', '$coupon_amount');");
 // insert into orders table end
-
-
 
 
 
@@ -113,18 +109,22 @@ function add_to_sellers_array($sellerid, $item_id)
 
 
 // add each items to the orderproducts table start
-$items = $_SESSION['cart'];
-foreach ($items as $item) {
-    // echo "<br> id =" . $item['item_id'] . ": price = " . $item['item_price'] . ": image = " . $item['item_image'] . ": name = " . $item['item_name'] . ": howmany = x" . $item['how_many'] . "<br>";
+$cart = json_decode($_COOKIE['cl_cart']);
+foreach ($cart as $item) {
+    $item = (array) $item;
     $item_id =  $item['item_id'];
     $how_many =  $item['how_many'];
-    $item_price = $item['item_price'];
+    $promotion_id =  $item['promotion_id'];
+    if ($promotion_id == "") {
+        $promotion_id = "empty";
+    }
+    $item_size = $item['item_size'];
+    $item_price = $product->getCartItemMainPriceBasedOnSizeVariationAndPromotionId($item_id, $item['item_size'], $item['promotion_id']);
     $sellerid = $product->getDetail($item['item_id'], "sellerid");
     add_to_sellers_array($sellerid, $item_id);
     $order->addItemsToCookie($customer_id, $item_id, $orderid);
 
-    $sql = "INSERT INTO orderproducts (orderid, productid, sellerid, customerid, howmany, price, status) VALUES ('$orderid', '$item_id', '$sellerid', '$customer_id', '$how_many', '$item_price', 'Active');";
-    $add_products = mysqli_query($conn, $sql);
+    $add_product = $db->setQuery("INSERT INTO orderproducts (orderid, productid, sellerid, customerid, howmany, price, size, promotion_id, status) VALUES ('$orderid', '$item_id', '$sellerid', '$customer_id', '$how_many', '$item_price', '$item_size', '$promotion_id', 'Active');");
 }
 // add each items to the orderproducts table end
 
@@ -136,10 +136,10 @@ foreach ($items as $item) {
 
 
 // add order pickup station if selected start
-if ($delivery_method == "Pickup") {
-    $sql = "INSERT INTO orderpickupstation (orderid, stationid) VALUES ('$orderid', '$delivery_station');";
-    $add_pickup_station = mysqli_query($conn, $sql);
-}
+// if ($delivery_method == "Pickup") {
+//     $sql = "INSERT INTO orderpickupstation (orderid, stationid) VALUES ('$orderid', '$delivery_station');";
+//     $add_pickup_station = mysqli_query($conn, $sql);
+// }
 // add order pickup station if selected end
 
 
@@ -148,21 +148,16 @@ if ($delivery_method == "Pickup") {
 
 
 // add order shipping address if selected start
-if ($delivery_method == "Door") {
+if ($delivery_method == "Door step delivery") {
     $sql = "INSERT INTO ordershippingaddress (orderid, firstname, lastname, email, phone, additionalphone, address1, address2, region) VALUES ('$orderid', '$firstname', '$lastname', '$email', '$phone', '$additionalphone', '$address1', '$address2', '$region');";
-    $add_pickup_station = mysqli_query($conn, $sql);
+    mysqli_query($conn, $sql);
 }
 // add order shipping address if selected end
 
 
 
 // add to ordercustomerdetails start
-$order_firstname = $_SESSION['order_firstname'];
-$order_lastname = $_SESSION['order_lastname'];
-$order_email = $_SESSION['order_email'];
-$order_phone = $_SESSION['order_phone'];
-
-$sql = "INSERT INTO ordercustomerdetails (orderid, firstname, lastname, email, phone, address1, address2, region) VALUES ('$orderid', '$order_firstname', '$order_lastname', '$order_email', '$order_phone', '$address1', '$address2', '$region');";
+$sql = "INSERT INTO ordercustomerdetails (orderid, firstname, lastname, email, phone, address1, address2, region) VALUES ('$orderid', '$firstname', '$lastname', '$email', '$phone', '$address1', '$address2', '$region');";
 mysqli_query($conn, $sql);
 // add to ordercustomerdetails end
 
@@ -175,20 +170,17 @@ mysqli_query($conn, $sql);
 
 
 // add pending balance to respective sellers start
-$items = $_SESSION['cart'];
-
-foreach ($items as $item) {
-
-    $total_price = $item['item_price'] * $item['how_many'];
-    $amount_removed = $admin->calcItemCommission($item['item_price']) * $item['how_many'];
+$cart = json_decode($_COOKIE['cl_cart']);
+foreach ($cart as $item) {
+    $item = (array) $item;
+    $item_price = $product->getCartItemMainPriceBasedOnSizeVariationAndPromotionId($item['item_id'], $item['item_size'], $item['promotion_id']);
+    $total_price = $item_price * $item['how_many'];
+    $amount_removed = $admin->calcItemCommission($item_price) * $item['how_many'];
     $amount_remaining = $total_price - $amount_removed;
 
     $sellerid = get_item_seller_id($item['item_id']);
     $seller->updateDetail($sellerid, "pendingbalance", $amount_remaining, "+");
-    // add_to_admin_pending_balance($adminid, $amount_removed);
     $admin->updateAdminDetail("pendingbalance", $amount_removed, "+");
-
-    //echo "<br>" . $item['item_name'] . ", Price=" . $item['item_price'] . ", Removed = " . $amount_removed . ", Remaining = " . $amount_remaining . ", sellerid = " . $sellerid . "<br>";
 }
 // add pending balance to respective sellers end
 
@@ -196,22 +188,24 @@ foreach ($items as $item) {
 
 
 
-
-
-
 // reduce item stock amount after it has been ordered start
-$items = $_SESSION['cart'];
-foreach ($items as $item) {
+$cart = json_decode($_COOKIE['cl_cart']);
+foreach ($cart as $item) {
+    $item = (array) $item;
     $item_id = $item['item_id'];
     $how_many = $item['how_many'];
 
-    if ($item['promotion_id'] != "") {
+    if ($item['promotion_id'] != "" and $product->promotionExist($item['promotion_id'])) {
+        if ($product->productHaveVariation($item_id)) {
+            $product->reduceVariationStock($item_id, $item['item_size'], $how_many);
+        }
         $product->reducePromotionStock($item_id, $item['promotion_id'], $how_many);
-    } else if ($product->productHaveVariation($item_id)) {
-        $product->reduceVariationStock($item_id, $item['item_size'], $how_many);
     } else {
-        //reduce_item_stocks($item_id);
-        $product->updateDetail($item_id, "howmany", $how_many, "-");
+        if ($product->productHaveVariation($item_id)) {
+            $product->reduceVariationStock($item_id, $item['item_size'], $how_many);
+        } else {
+            $product->updateDetail($item_id, "howmany", $how_many, "-");
+        }
     }
 }
 
@@ -220,14 +214,12 @@ foreach ($items as $item) {
 
 $email = new Email();
 // send sellers new order email notification start
-//send_seller_new_order_email($o;rderid);
 $email->sendSellerNewOrderEmail($orderid);
 // send sellers new order email notification end
 
 
 // send customer new order email notification start
-// send_customer_new_order_email($_SESSION['order_id'], $_SESSION['order_shipping_fee']);
-$email->sendCustomerNewOrderEmail($_SESSION['order_id'], $_SESSION['order_shipping_fee']);
+$email->sendCustomerNewOrderEmail($orderid, $shipping_fee);
 // send customer new order email notification end
 
 
@@ -237,19 +229,23 @@ $email->sendCustomerNewOrderEmail($_SESSION['order_id'], $_SESSION['order_shippi
 
 
 
-// add orderid to session variable start
-$_SESSION['order_id'] = $orderid;
-// add orderid to session variable end
+
+$_SESSION['order_firstname'] = $firstname;
+$_SESSION['order_lastname'] = $lastname;
+$_SESSION['order_region'] = $region;
+$_SESSION['order_address1'] = $address1;
+$_SESSION['order_address2'] = $address2;
+$_SESSION['order_email'] = mysqli_real_escape_string($db->conn, $customer->getShippingAddressDetail($customer_id, "email"));
+$_SESSION['order_phone'] = $phone;
+$_SESSION['order_additionalphone'] = $additionalphone;
+$_SESSION['order_shipping_fee'] = $shipping_fee;
+
+// clear cart cookie
+setcookie("cl_cart", "", time() - 2419200);
+
+echo "<h3>Please wait...</h3>";
 
 
-// clear cart and other session variables
-unset($_SESSION['cart']);
-unset($_SESSION['coupon_amount']);
-// unset($_SESSION['order_shipping_fee']);
 
 
-
-
-echo '<script>
-window.location.href="order-status-view";
-</script>';
+$admin->goToPage("order-status-view", "");

@@ -98,6 +98,21 @@ class Order
         return $pickup_detail;
     }
 
+    public function productExist($product_id)
+    {
+        global $db;
+
+        $result = $db->setQuery("SELECT * FROM product WHERE uniqueid='$product_id';");
+        $numrows = mysqli_num_rows($result);
+
+        if ($numrows > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+
 
     public function getNumTotalProductsOrdered($order_id)
     {
@@ -174,7 +189,7 @@ class Order
                     $order_id = $ordered_item['order_id'];
 
                     // check if item has been delivered and also have no review yet!
-                    if ($customer_id == $session_id and $this->getProductOrderDetail($order_id, $item_id, "status") == "Settled" and !$customer->customerHaveReviewedItem($customer_id, $item_id, $order_id)) {
+                    if ($customer_id == $session_id and $this->productExist($item_id) and $this->getProductOrderDetail($order_id, $item_id, "status") == "Settled" and !$customer->customerHaveReviewedItem($customer_id, $item_id, $order_id)) {
                         $result = array('status' => 'found', 'item_id' => $item_id, 'order_id' => $order_id, 'customer_id' => $customer_id);
                         return $result;
                     }

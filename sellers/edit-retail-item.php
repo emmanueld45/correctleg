@@ -9,6 +9,14 @@ include '../classes/admin.class.php';
 include '../classes/products.class.php';
 
 
+if (!isset($_SESSION['id'])) {
+    $admin->goToPage("login", "invalid_seller");
+}
+
+if (!$seller->sellerIsLoggedIn($_SESSION['id'])) {
+    $admin->goToPage("login", "invalid_seller");
+}
+
 $sessionid = $_SESSION['id'];
 
 $item_id = $_GET['i'];
@@ -476,7 +484,7 @@ $row10 = mysqli_fetch_assoc($result)
                     </div>
                     <div class="alert alert-success" style="font-size:15px;margin-top:5px;text-align:center;">
                         product <span class="alert-link"> has been updated successfully!</span><br>
-                        <a href="my-items.php" style="color:crimson;"><u>view items <i class="fa fa-angle-double-right"></i></u></a>
+                        <a href="my-retail-items" style="color:crimson;"><u>view items <i class="fa fa-angle-double-right"></i></u></a>
                     </div>
                 <?php } ?>
                 <?php
@@ -615,7 +623,7 @@ $row10 = mysqli_fetch_assoc($result)
 
                 <div style="width:100%;display:flex;flex-flow:row nowrap;">
 
-                    <input class="form-control item-size" name="itemsize" value="<?php $row10['size']; ?>" style="width:;margin-right:10px;" required>
+                    <input class="form-control item-size" name="itemsize" value="<?php echo $row10['size']; ?>" style="width:;margin-right:10px;" required>
 
 
                     <select class="form-control" name="itemcolor" style="width:;" required>
@@ -627,7 +635,9 @@ $row10 = mysqli_fetch_assoc($result)
 
                 <!-- brand name -->
                 <label style="font-weight:600;">Item Brand Name <span style="color:red;">*</span></label>
-                <input type="text" class="form-control" name="brandname" value="<?php echo $row10['brandname']; ?>" required>
+                <input type="text" class="form-control" name="brandname" value="<?php if ($row10['brandname'] != "empty") {
+                                                                                    echo $row10['brandname'];
+                                                                                } ?>">
                 <br>
 
                 <!-- Amount in stock -->
@@ -916,7 +926,7 @@ $row10 = mysqli_fetch_assoc($result)
                             </div>
                             <div class="alert alert-success" style="font-size:15px;margin-top:5px;text-align:center;">
                                 product <span class="alert-link">has been updated successfully!</span><br>
-                                <a href="my-items.php" style="color:crimson;"><u>view items <i class="fa fa-angle-double-right"></i></u></a>
+                                <a href="my-retail-items" style="color:crimson;"><u>view items <i class="fa fa-angle-double-right"></i></u></a>
                             </div>
                         <?php } ?>
                         <?php
@@ -1050,7 +1060,7 @@ $row10 = mysqli_fetch_assoc($result)
                         </div>
 
                         <div style="width:100%;display:flex;flex-flow:row nowrap;">
-                            <input class="form-control item-size" name="itemsize" value="<?php $row10['size']; ?>" style="width:;margin-right:10px;" required>
+                            <input class="form-control item-size" name="itemsize" value="<?php echo $row10['size']; ?>" style="width:;margin-right:10px;" required>
 
 
 
@@ -1063,7 +1073,9 @@ $row10 = mysqli_fetch_assoc($result)
 
                         <!-- brand name -->
                         <label style="font-weight:600;">Item Brand Name <span style="color:red;">*</span></label>
-                        <input type="text" name="brandname" class="form-control" value="<?php echo $row10['brandname']; ?>" required>
+                        <input type="text" name="brandname" class="form-control" value="<?php if ($row10['brandname'] != "empty") {
+                                                                                            echo $row10['brandname'];
+                                                                                        } ?>">
                         <br>
 
                         <!-- Amount in stock -->
@@ -1300,6 +1312,10 @@ $row10 = mysqli_fetch_assoc($result)
 
         if ($old_price == "") {
             $old_price = "empty";
+        }
+
+        if ($brandname == "") {
+            $brandname = "empty";
         }
 
 

@@ -60,12 +60,37 @@ if (isset($_POST['process_online_payment'])) {
         // please check other things like whether you already gave value for this ref
         // if the email matches the customer who owns the product etc
         //Give Value and return to Success page
-
+        $_SESSION['pay_online'] = "yes";
         $result = array("status" => "success");
         echo json_encode($result);
     } else {
         //Dont Give Value and return to Failure page
         $result = array("status" => "failed");
+        echo json_encode($result);
+    }
+}
+
+
+
+if (isset($_POST['check_items_have_available_quantities'])) {
+    $cart = json_decode($_COOKIE['cl_cart']);
+    $x = 0;
+    $message = "";
+    foreach ($cart as $item) {
+        $item = (array) $item;
+        $itemIsAvailable = $product->itemHaveSufficientQuantityForOrder($item['item_id'], $item['promotion_id'], $item['item_size'], $item['how_many']);
+        if ($itemIsAvailable['status'] != 'yes') {
+            $message = $itemIsAvailable['message'];
+            //$admin->goToPage("cart", "item_unavailable=true&message=$message");
+            $x++;
+        }
+    }
+
+    if ($x == 0) {
+        $result = array('status' => 'yes');
+        echo json_encode($result);
+    } else {
+        $result = array('status' => 'no', 'message' => $message);
         echo json_encode($result);
     }
 }

@@ -3,9 +3,9 @@
     <a href="customers/login?view_saved_item" class="bottom-nav-btn"><i class="fa fa-heart stroke-transparent"></i><?php if (isset($_SESSION['id']) and customer_is_logged_in($_SESSION['id'])) {
                                                                                                                         echo "<button>" . get_customer_total_saved_items($_SESSION['id']) . "</button>";
                                                                                                                     } ?><br><span>Saved item</span></a>
-    <a href="cart.php" class="bottom-nav-btn"><i class="fa fa-shopping-cart stroke-transparent"></i><?php if (isset($_SESSION['cart'])) {
-                                                                                                        echo "<button class='how-many-items'>" . count($_SESSION['cart']) . "</button>";
-                                                                                                    } ?><br><span>View cart</span></a>
+    <a href="cart" class="bottom-nav-btn"><i class="fa fa-shopping-cart stroke-transparent"></i><?php if (isset($_COOKIE['cl_cart'])) {
+                                                                                                    echo "<button class='how-many-items'>" . $product->getTotalNumItemsInCart() . "</button>";
+                                                                                                } ?><br><span>View cart</span></a>
 
 
 

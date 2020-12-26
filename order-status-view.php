@@ -295,9 +295,7 @@ if (!isset($_SESSION['order_id'])) {
             <br><br>
             You can easily send us a message on whatsapp for further enquiries
         </div>
-        <!--
-https://wa.me/<?php echo $chat_phone; ?>?text=<?php echo $chat_text; ?>
-    -->
+
         <?php
         $chat_phone = 2348162383712;
         $chat_text_normal = "Hello, my name is " . $_SESSION['order_firstname'] . ", I just placed an Order and my order ID is: " . $_SESSION['order_id'] . "";
@@ -307,7 +305,7 @@ https://wa.me/<?php echo $chat_phone; ?>?text=<?php echo $chat_text; ?>
             <a href="https://wa.me/<?php echo $chat_phone; ?>?text=<?php echo $chat_text; ?>" class="whatsapp-btn"><img src="img/whatsapp-logo.png" class="whatsapp-icon"> Send Message</a>
         </div>
 
-        <a href="index.php" style="color:inherit">
+        <a href="./" style="color:inherit">
             <div style="width:100%;display:flex;justify-content:center;">
                 <button class="continue-shopping-btn">CONTINUE SHOPPING <i class="fa fa-angle-double-right"></i></button>
             </div>
@@ -323,14 +321,14 @@ https://wa.me/<?php echo $chat_phone; ?>?text=<?php echo $chat_text; ?>
         <div class="row address-details-container">
 
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 mb-3">
                 <div class="card">
                     <div class="card-header" style="width:100%;font-weight:600;text-align:center;font-weight:20px;">Personal details</div>
                     <div class="card-body">
                         <label>Name:</label><br>
                         <span><?php echo $_SESSION['order_firstname'] . " " . $_SESSION['order_lastname']; ?></span><br>
                         <label>Email Address:</label><br>
-                        <span><?php echo $_SESSION['order_email']; ?></span><br>
+                        <span><?php echo $_SESSION['order_email'];; ?></span><br>
                         <label>Phone:</label><br>
                         <span><?php echo $_SESSION['order_phone']; ?></span><br>
                         <label>Additional Phone:</label><br>
@@ -346,13 +344,13 @@ https://wa.me/<?php echo $chat_phone; ?>?text=<?php echo $chat_text; ?>
                     <div class="card-header" style="width:100%;font-weight:600;text-align:center;font-weight:20px;">Address details</div>
                     <div class="card-body">
                         <?php
-                        if ($_SESSION['delivery_method'] == "Pickup") {
+                        // if ($_SESSION['delivery_method'] == "Pickup") {
 
-                            $pickup_station_address =  $_SESSION['pickup_station_address'];
+                        //     $pickup_station_address =  $_SESSION['pickup_station_address'];
 
-                            echo "<label>Pickup Location:</label><br>
-                            <span>$pickup_station_address</span><br>";
-                        }
+                        //     echo "<label>Pickup Location:</label><br>
+                        //     <span>$pickup_station_address</span><br>";
+                        // }
                         ?>
                         <?php
                         $shipping_fee =  $_SESSION['order_shipping_fee'];

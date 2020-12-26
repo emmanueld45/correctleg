@@ -10,6 +10,8 @@ include 'classes/users.class.php';
 include 'classes/customers.class.php';
 include 'classes/orders.class.php';
 
+setcookie("dont_show_rating_modal", "dont show", time() - 86400);
+
 if (isset($_GET['close_rating_modal'])) {
     setcookie("dont_show_rating_modal", "dont show", time() + 86400);
     $admin->goToPage("./", "");
@@ -94,7 +96,23 @@ if (isset($_GET['close_rating_modal'])) {
                 display: none;
             }
 
-            .sliding-banner-img {}
+            .sliding-banner-img {
+                width: 100%;
+                min-height: 150px;
+                background-repeat: no-repeat;
+                background-image:
+                    /* layer 2: avatar */
+                    /* white circle with 16px radius */
+                    radial-gradient(circle 16px,
+                        white 99%,
+                        transparent 0),
+                    /* layer 1: title */
+                    /* white rectangle with 40px height */
+                    linear-gradient(white 0px, transparent 0),
+                    /* layer 0: card bg */
+                    /* gray rectangle that covers whole element */
+                    linear-gradient(#eee 100%, transparent 0);
+            }
 
             .filter-btn {
                 background: white;
@@ -428,6 +446,22 @@ if (isset($_GET['close_rating_modal'])) {
                 width: 100%;
                 max-height: 320px;
                 object-fit: cover;
+
+
+                min-height: 320px;
+                background-repeat: no-repeat;
+                background-image:
+                    /* layer 2: avatar */
+                    /* white circle with 16px radius */
+                    radial-gradient(circle 16px,
+                        white 99%,
+                        transparent 0),
+                    /* layer 1: title */
+                    /* white rectangle with 40px height */
+                    linear-gradient(white 0px, transparent 0),
+                    /* layer 0: card bg */
+                    /* gray rectangle that covers whole element */
+                    linear-gradient(#eee 100%, transparent 0);
             }
 
             .sliding-banner-thumb-img {
@@ -436,6 +470,20 @@ if (isset($_GET['close_rating_modal'])) {
                 margin-right: 10px;
                 margin-bottom: 10px;
                 border-radius: 10px;
+
+                background-repeat: no-repeat;
+                background-image:
+                    /* layer 2: avatar */
+                    /* white circle with 16px radius */
+                    radial-gradient(circle 16px,
+                        white 99%,
+                        transparent 0),
+                    /* layer 1: title */
+                    /* white rectangle with 40px height */
+                    linear-gradient(white 0px, transparent 0),
+                    /* layer 0: card bg */
+                    /* gray rectangle that covers whole element */
+                    linear-gradient(#eee 100%, transparent 0);
             }
 
             .selected-items-title {
@@ -760,22 +808,22 @@ if (isset($_GET['close_rating_modal'])) {
                 <!-- The slideshow -->
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="banners/banner17.jpg" alt="Clearance sales" class="sliding-banner-img">
+                        <img data-src="banners/banner17.jpg" class="sliding-banner-img lazy-loaded-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="banners/bannern3.jpg" alt="Clearance sales" class="sliding-banner-img">
+                        <img data-src="banners/bannern3.jpg" class="sliding-banner-img lazy-loaded-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="banners/bannern5.jpg" alt="Clearance sales" class="sliding-banner-img">
+                        <img data-src="banners/bannern5.jpg" class="sliding-banner-img lazy-loaded-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="banners/bannern6.jpg" alt="Clearance sales" class="sliding-banner-img">
+                        <img data-src="banners/bannern6.jpg" class="sliding-banner-img lazy-loaded-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="banners/bannern7.jpg" alt="Clearance sales" class="sliding-banner-img">
+                        <img data-src="banners/bannern7.jpg" class="sliding-banner-img lazy-loaded-img">
                     </div>
                     <div class="carousel-item">
-                        <img src="banners/banner4.jpeg" alt="Clearance sales" class="sliding-banner-img">
+                        <img data-src="banners/banner4.jpeg" class="sliding-banner-img lazy-loaded-img">
                     </div>
                 </div>
 
@@ -797,10 +845,10 @@ if (isset($_GET['close_rating_modal'])) {
         <!-- right side start -->
         <div class="sliding-banner-right">
 
-            <img src="banners/banner1.jpg" class="sliding-banner-thumb-img">
-            <img src="banners/banner8.jpg" class="sliding-banner-thumb-img">
-            <img src="banners/banner9.jpg" class="sliding-banner-thumb-img">
-            <img src="banners/banner10.jpg" class="sliding-banner-thumb-img">
+            <img data-src="banners/banner1.jpg" class="sliding-banner-thumb-img lazy-loaded-img">
+            <img data-src="banners/banner8.jpg" class="sliding-banner-thumb-img lazy-loaded-img">
+            <img data-src="banners/banner9.jpg" class="sliding-banner-thumb-img lazy-loaded-img">
+            <img data-src="banners/banner10.jpg" class="sliding-banner-thumb-img lazy-loaded-img">
         </div>
         <!-- right side end -->
 
@@ -985,26 +1033,28 @@ if (isset($_GET['close_rating_modal'])) {
             $top_products_array = array("5edbff73de66f", "5edbffe41ecfa", "5edc04c1a6e89", "5ee20b9f768f1", "5eebe41f69634");
             foreach ($top_products_array as $top_product_id) {
                 if ($product->getDetail($top_product_id, "status") == "active") {
+                    if ($product->itemIsAvailable($top_product_id)) {
 
             ?>
-                    <a href="product?i=<?php echo $top_product_id; ?>" class="box">
-                        <!-- <span class="label">20% off</span> -->
-                        <div class="centered-div">
-                            <img data-src="<?php echo $product->getDetail($top_product_id, "image1"); ?>" class="lazy-loaded-img">
-                        </div>
-                        <div class="product-name"><?php echo $product->shortenLength($product->getDetail($top_product_id, "name"), 17, ".."); ?></div>
-                        <div class="stars-container">
+                        <a href="product?i=<?php echo $top_product_id; ?>" class="box">
+                            <!-- <span class="label">20% off</span> -->
+                            <div class="centered-div">
+                                <img data-src="<?php echo $product->getDetail($top_product_id, "image1"); ?>" class="lazy-loaded-img">
+                            </div>
+                            <div class="product-name"><?php echo $product->shortenLength($product->getDetail($top_product_id, "name"), 17, ".."); ?></div>
+                            <div class="stars-container">
 
-                            <?php
-                            echo $product->getStars($top_product_id, "<i class='fa fa-star active' style='color:orange;font-size:14px;'></i>", "<i class='fa fa-star' style='color:lightgrey;font-size:14px;'></i>");
-                            ?>
-                        </div>
-                        <div class="product-price">
-                            <span class="new-price"><span>&#8358</span><?php echo number_format($product->getDetail($top_product_id, "price")); ?></span>
-                            <span class="old-price"><span>&#8358</span><?php echo number_format($product->getDetail($top_product_id, "old_price")); ?></span>
-                        </div>
-                    </a>
+                                <?php
+                                echo $product->getStars($top_product_id, "<i class='fa fa-star active' style='color:orange;font-size:14px;'></i>", "<i class='fa fa-star' style='color:lightgrey;font-size:14px;'></i>");
+                                ?>
+                            </div>
+                            <div class="product-price">
+                                <span class="new-price"><span>&#8358</span><?php echo number_format($product->getDetail($top_product_id, "price")); ?></span>
+                                <span class="old-price"><span>&#8358</span><?php echo number_format($product->getDetail($top_product_id, "old_price")); ?></span>
+                            </div>
+                        </a>
             <?php
+                    }
                 }
             }
             ?>
@@ -1062,23 +1112,25 @@ if (isset($_GET['close_rating_modal'])) {
         <div class="component-container">
             <?php
             while ($row = mysqli_fetch_assoc($result)) {
+                if ($product->itemIsAvailable($row['uniqueid'])) {
 
             ?>
-                <a href="product?i=<?php echo $row['uniqueid']; ?>" class="box">
-                    <!-- <span class="label">30% off</span> -->
-                    <div class="centered-div">
-                        <img data-src="<?php echo $row['image1']; ?>" class="lazy-loaded-img" alt="image">
-                    </div>
-                    <div class="product-name"><?php echo $product->shortenLength($row['name'], 17, ".."); ?></div>
-                    <div class="stars-container">
-                        <?php echo $product->getStars($row['uniqueid'], "<i class='fa fa-star'  style='color:orange;font-size:13px;'></i>", "<i class='fa fa-star'  style='color:lightgrey;font-size:13px;'></i>"); ?>
-                    </div>
-                    <div class="product-price">
-                        <span class="new-price"><span>&#8358</span><?php echo number_format($row['price']); ?></span>
-                        <span class="old-price"><span>&#8358</span><?php echo number_format($row['old_price']); ?></span>
-                    </div>
-                </a>
+                    <a href="product?i=<?php echo $row['uniqueid']; ?>" class="box">
+                        <!-- <span class="label">30% off</span> -->
+                        <div class="centered-div">
+                            <img data-src="<?php echo $row['image1']; ?>" class="lazy-loaded-img">
+                        </div>
+                        <div class="product-name"><?php echo $product->shortenLength($row['name'], 17, ".."); ?></div>
+                        <div class="stars-container">
+                            <?php echo $product->getStars($row['uniqueid'], "<i class='fa fa-star'  style='color:orange;font-size:13px;'></i>", "<i class='fa fa-star'  style='color:lightgrey;font-size:13px;'></i>"); ?>
+                        </div>
+                        <div class="product-price">
+                            <span class="new-price"><span>&#8358</span><?php echo number_format($row['price']); ?></span>
+                            <span class="old-price"><span>&#8358</span><?php echo number_format($row['old_price']); ?></span>
+                        </div>
+                    </a>
             <?php
+                }
             }
             ?>
 
@@ -1130,14 +1182,12 @@ if (isset($_GET['close_rating_modal'])) {
                     $items_id_array[count($items_id_array)] = $items_array['uniqueid'];
                 }
 
-                //echo $items_id_array[0];
-
 
                 if ($numrows != 0) {
                 ?>
                     <div class="col-lg-4 col-md-6">
                         <div class="latest-product__text">
-                            <h4>For Women</h4>
+                            <h4>For Men</h4>
                             <div class="latest-product__slider owl-carousel">
 
                                 <?php
@@ -1168,22 +1218,24 @@ if (isset($_GET['close_rating_modal'])) {
                                         $boxes = 0;
                                         for ($boxes; $boxes < 3; $boxes++) {
                                             $item_id = $items_id_array[$count];
+                                            if ($product->productExist($item_id) and  $product->itemIsAvailable($item_id)) {
                                         ?>
-                                            <a href="product?i=<?php echo $item_id; ?>" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img class="lazy-loaded-img" data-src="<?php echo $product->getDetail($item_id, "image1"); ?>" alt="" style="width:100px;height:100px;" />
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6><?php echo $product->shortenLength($product->getDetail($item_id, "name"), 17, ".."); ?></h6>
-                                                    <span><u>&#8358</u><?php echo number_format($product->getDetail($item_id, "price")); ?></span>
-                                                    <?php
-                                                    if (item_have_old_price($item_id)) {
-                                                        echo "<span style='color:grey;font-size:15px;text-decoration:line-through;margin-left:5px;font-weight:normal;'><u>&#8358</u>" . number_format($product->getDetail($item_id, "old_price")) . "</span>";
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </a>
+                                                <a href="product?i=<?php echo $item_id; ?>" class="latest-product__item">
+                                                    <div class="latest-product__item__pic">
+                                                        <img class="lazy-loaded-img" data-src="<?php echo $product->getDetail($item_id, "image1"); ?>" alt="" style="width:100px;height:100px;" />
+                                                    </div>
+                                                    <div class="latest-product__item__text">
+                                                        <h6><?php echo $product->shortenLength($product->getDetail($item_id, "name"), 17, ".."); ?></h6>
+                                                        <span><u>&#8358</u><?php echo number_format($product->getDetail($item_id, "price")); ?></span>
+                                                        <?php
+                                                        if (item_have_old_price($item_id)) {
+                                                            echo "<span style='color:grey;font-size:15px;text-decoration:line-through;margin-left:5px;font-weight:normal;'><u>&#8358</u>" . number_format($product->getDetail($item_id, "old_price")) . "</span>";
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </a>
                                         <?php
+                                            }
                                             $count++;
                                         }
                                         ?>
@@ -1267,22 +1319,24 @@ if (isset($_GET['close_rating_modal'])) {
                                         $boxes = 0;
                                         for ($boxes; $boxes < 3; $boxes++) {
                                             $item_id = $items_id_array[$count];
+                                            if ($product->productExist($item_id) and $product->itemIsAvailable($item_id)) {
                                         ?>
-                                            <a href="product?i=<?php echo $item_id; ?>" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img class="lazy-loaded-img" data-src="<?php echo $product->getDetail($item_id, "image1"); ?>" alt="" style="width:100px;height:100px;" />
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6><?php echo $product->shortenLength($product->getDetail($item_id, "name"), 17, ".."); ?></h6>
-                                                    <span><u>&#8358</u><?php echo number_format($product->getDetail($item_id, "price")); ?></span>
-                                                    <?php
-                                                    if (item_have_old_price($item_id)) {
-                                                        echo "<span style='color:grey;font-size:15px;text-decoration:line-through;margin-left:5px;font-weight:normal;'><u>&#8358</u>" . number_format($product->getDetail($item_id, "old_price")) . "</span>";
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </a>
+                                                <a href="product?i=<?php echo $item_id; ?>" class="latest-product__item">
+                                                    <div class="latest-product__item__pic">
+                                                        <img class="lazy-loaded-img" data-src="<?php echo $product->getDetail($item_id, "image1"); ?>" alt="" style="width:100px;height:100px;" />
+                                                    </div>
+                                                    <div class="latest-product__item__text">
+                                                        <h6><?php echo $product->shortenLength($product->getDetail($item_id, "name"), 17, ".."); ?></h6>
+                                                        <span><u>&#8358</u><?php echo number_format($product->getDetail($item_id, "price")); ?></span>
+                                                        <?php
+                                                        if (item_have_old_price($item_id)) {
+                                                            echo "<span style='color:grey;font-size:15px;text-decoration:line-through;margin-left:5px;font-weight:normal;'><u>&#8358</u>" . number_format($product->getDetail($item_id, "old_price")) . "</span>";
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </a>
                                         <?php
+                                            }
                                             $count++;
                                         }
                                         ?>
@@ -1370,22 +1424,24 @@ if (isset($_GET['close_rating_modal'])) {
                                         $boxes = 0;
                                         for ($boxes; $boxes < 3; $boxes++) {
                                             $item_id = $items_id_array[$count];
+                                            if ($product->productExist($item_id) and $product->itemIsAvailable($item_id)) {
                                         ?>
-                                            <a href="product?i=<?php echo $item_id; ?>" class="latest-product__item">
-                                                <div class="latest-product__item__pic">
-                                                    <img class="lazy-loaded-img" data-src="<?php echo $product->getDetail($item_id, "image1"); ?>" alt="" style="width:100px;height:100px;" />
-                                                </div>
-                                                <div class="latest-product__item__text">
-                                                    <h6><?php echo $product->shortenLength($product->getDetail($item_id, "name"), 17, ".."); ?></h6>
-                                                    <span><u>&#8358</u><?php echo number_format($product->getDetail($item_id, "price")); ?></span>
-                                                    <?php
-                                                    if ($product->getDetail($item_id, "old_price") != "empty") {
-                                                        echo "<span style='color:grey;font-size:15px;text-decoration:line-through;margin-left:5px;font-weight:normal;'><u>&#8358</u>" . number_format($product->getDetail($item_id, "old_price")) . "</span>";
-                                                    }
-                                                    ?>
-                                                </div>
-                                            </a>
+                                                <a href="product?i=<?php echo $item_id; ?>" class="latest-product__item">
+                                                    <div class="latest-product__item__pic">
+                                                        <img class="lazy-loaded-img" data-src="<?php echo $product->getDetail($item_id, "image1"); ?>" alt="" style="width:100px;height:100px;" />
+                                                    </div>
+                                                    <div class="latest-product__item__text">
+                                                        <h6><?php echo $product->shortenLength($product->getDetail($item_id, "name"), 17, ".."); ?></h6>
+                                                        <span><u>&#8358</u><?php echo number_format($product->getDetail($item_id, "price")); ?></span>
+                                                        <?php
+                                                        if ($product->getDetail($item_id, "old_price") != "empty") {
+                                                            echo "<span style='color:grey;font-size:15px;text-decoration:line-through;margin-left:5px;font-weight:normal;'><u>&#8358</u>" . number_format($product->getDetail($item_id, "old_price")) . "</span>";
+                                                        }
+                                                        ?>
+                                                    </div>
+                                                </a>
                                         <?php
+                                            }
                                             $count++;
                                         }
                                         ?>
@@ -1693,11 +1749,6 @@ if (isset($_GET['close_rating_modal'])) {
                     items: 5
                 }
             }
-        })
-
-        show_click_loader();
-        $(document).ready(function() {
-            $(".click-loader").css("display", "none")
         })
     </script>
 

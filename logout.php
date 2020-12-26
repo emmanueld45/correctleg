@@ -4,9 +4,11 @@ session_unset();
 session_destroy();
 
 
-setcookie("email", $email, time() - 7776000);
+setcookie("email", "", time() - 7776000);
 
+setcookie("password", "", time() - 7776000);
 
-setcookie("password", $password, time() - 7776000);
+setcookie("customer_id", "", time() - 86400);
+
 
 header('location: ./');

@@ -312,6 +312,21 @@ function validateRatingModal(){
 }
 /// rating system end 
 
+// start alert start 
+function show_site_alert(message, time){
+ var site_alert = document.createElement("div");
+ site_alert.className = "site-alert";
+ site_alert.innerHTML = message;
+ document.body.appendChild(site_alert);
+ $(".site-alert").fadeIn();
+ setTimeout(function(){
+  $(".site-alert").fadeOut();
+  document.body.removeChild(site_alert);
+ }, 5000)
+}
+// site alert end 
+
+
 // service worker start 
 if('serviceWorker' in navigator){
   console.log('service worker supported')
@@ -322,7 +337,5 @@ if('serviceWorker' in navigator){
         .catch(err => console.log(`Service Woker: Error: ${err}`))
        });
 }
-
-
 
 // service worker end

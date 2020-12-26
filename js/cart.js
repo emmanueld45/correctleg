@@ -79,12 +79,13 @@ $(".add-to-cart-btn").click(function () {
   // open_cart_modal();
 
  if(variation_price == "" && item_have_variation == "yes"){
-   alert("Kindly select a size variation for this item")
+   //alert("Kindly select a size variation for this item")
+   show_site_alert("Kindly select a size variation for this item")
    $(".variation-error-display").html("Click the box below to pick a size <br>");
  }else{
   add_item_to_cart = "yes";
   $.ajax({
-    url: "new-cart-handler.php",
+    url: "cart-handler.php",
     method: "POST",
     async: false,
     data: {
@@ -100,11 +101,13 @@ $(".add-to-cart-btn").click(function () {
     },
     success: function (data) {
       if (data == "nostocks") {
-        alert("Item out of stocks");
+       // alert("Item out of stocks");
+       show_site_alert("Item out of stock");
       } else if (data == "stocksunavailable") {
-        alert(
-          "The amount of this item is not up to your selected amount.. Kindly reduce your amount and try again!"
-        );
+        // alert(
+        //   "The amount of this item is not up to your selected amount.. Kindly reduce your amount and try again!"
+        // );
+        show_site_alert("Quantity specified not available, kindly reduce quantity")
       } else if (data == "added") {
         open_cart_modal();
         var cart_total_number = $(".cart-total-number").val();
@@ -157,11 +160,14 @@ $(".save-item-btn").click(function () {
     },
     success: function (data) {
       if (data == "loginfirst") {
-        alert("you have to login first to save item");
+        //alert("you have to login first to save item");
+        show_site_alert("you have to login first to save item <a href='customers/login?'>login here</a>");
       } else if (data == "itemalreadysaved") {
-        alert("item has been already saved");
+        //alert("item has been already saved");
+        show_site_alert("Item already saved!");
       } else if (data == "itemsaved") {
-        alert("item has been saved");
+        // alert("item has been saved");
+        show_site_alert("Added to saved items")
       }
     },
   });

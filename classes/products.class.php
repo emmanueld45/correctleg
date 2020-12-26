@@ -139,6 +139,19 @@ class Product
     }
 
 
+    public function saveItem($customer_id, $item_id)
+    {
+        global $db;
+
+        $result = $db->setQuery("INSERT INTO savedproducts (customerid, productid) VALUES ('$customer_id', '$item_id');");
+    }
+
+    public function unsaveItem($customer_id, $item_id)
+    {
+        global $db;
+
+        $db->setQuery("DELETE FROM savedproducts WHERE customerid='$customer_id' AND productid='$item_id';");
+    }
 
 
     public function shortenName($name)
@@ -319,6 +332,20 @@ class Product
         }
     }
 
+    public function productHaveBeenOrdered($item_id)
+    {
+        global $db;
+
+        $result = $db->setQuery("SELECT * FROM orderproducts WHERE productid='$item_id';");
+        $numrows = mysqli_num_rows($result);
+
+        if ($numrows != 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function IsInPromotion($item_id)
     {
         global $db;
@@ -366,6 +393,40 @@ class Product
         $result1 = $db->setQuery("UPDATE promotion_products SET quantity='$new_quantity' WHERE product_id='$item_id' AND promotion_id='$promotion_id';");
     }
 
+    public function increasePromotionStock($item_id, $promotion_id, $how_many)
+    {
+        global $db;
+
+        $result = $db->setQuery("SELECT * FROM promotion_products WHERE product_id='$item_id' AND promotion_id='$promotion_id';");
+        $row = mysqli_fetch_assoc($result);
+
+        $new_quantity = $row['quantity'] + $how_many;
+
+
+        $result1 = $db->setQuery("UPDATE promotion_products SET quantity='$new_quantity' WHERE product_id='$item_id' AND promotion_id='$promotion_id';");
+    }
+
+
+    public function itemIsAvailable($item_id)
+    {
+        global $db;
+
+        if ($this->productHaveVariation($item_id)) {
+            $result = $db->setQuery("SELECT * FROM product_variations WHERE product_id='$item_id';");
+            while ($row = mysqli_fetch_assoc($result)) {
+                if ($row['quantity'] > 0) {
+                    return true;
+                }
+            }
+            return false;
+        } else {
+            if ($this->getDetail($item_id, "howmany") > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
 
 
     public function displayStars($number_of_stars, $active_star_template, $inactive_star_template)
@@ -486,6 +547,16 @@ class Product
         }
     }
 
+    public function totalNumProductReviews($product_id)
+    {
+        global $db;
+
+        $result = $db->setQuery("SELECT * FROM product_reviews WHERE product_id='$product_id';");
+        $numrows = mysqli_num_rows($result);
+
+        return $numrows;
+    }
+
     public function addVariation($item_id, $size, $price, $quantity)
     {
         global $db;
@@ -536,6 +607,7 @@ class Product
     }
 
 
+
     public function reduceVariationStock($item_id, $variation_size, $how_many)
     {
         global $db;
@@ -547,6 +619,18 @@ class Product
         } else {
             $new_quantity = 0;
         }
+
+        $result1 = $db->setQuery("UPDATE product_variations SET quantity='$new_quantity' WHERE product_id='$item_id' AND size='$variation_size';");
+    }
+
+    public function increaseVariationStock($item_id, $variation_size, $how_many)
+    {
+        global $db;
+
+        $result = $db->setQuery("SELECT * FROM product_variations WHERE product_id='$item_id' AND size='$variation_size';");
+        $row = mysqli_fetch_assoc($result);
+
+        $new_quantity = $row['quantity'] + $how_many;
 
         $result1 = $db->setQuery("UPDATE product_variations SET quantity='$new_quantity' WHERE product_id='$item_id' AND size='$variation_size';");
     }
@@ -569,11 +653,11 @@ class Product
 
         if ($promotion_id != "" and $this->promotionExist($promotion_id)) {
             $how_many_available = $this->getPromotionProductDetails($item_id, $promotion_id, 'quantity');
-            if ($how_many < $how_many_available) {
+            if ($how_many <= $how_many_available) {
 
                 if ($this->productHaveVariation($item_id)) {
                     $how_many_available = $this->getProductVariationQuantityFromSize($item_id, $item_size);
-                    if ($how_many < $how_many_available) {
+                    if ($how_many <= $how_many_available) {
                         //echo 'available';
                         return array('status' => 'yes', 'message' => '');
                     } else {
@@ -581,7 +665,7 @@ class Product
                         return array('status' => 'no', 'message' => "your item '" . $this->getDetail($item_id, 'name') . "' is out of stock for your desired size");
                     }
                 } else {
-                    if ($how_many < $how_many_available) {
+                    if ($how_many <= $how_many_available) {
                         // echo 'available';
                         return array('status' => 'yes', 'message' => '');;
                     } else {
@@ -596,7 +680,7 @@ class Product
         } else {
             if ($this->productHaveVariation($item_id)) {
                 $how_many_available = $this->getProductVariationQuantityFromSize($item_id, $item_size);
-                if ($how_many < $how_many_available) {
+                if ($how_many <= $how_many_available) {
                     //echo 'available';
                     return array('status' => 'yes', 'message' => '');
                 } else {
@@ -605,7 +689,7 @@ class Product
                 }
             } else {
                 $how_many_available = $this->getDetail($item_id, 'howmany');
-                if ($how_many < $how_many_available) {
+                if ($how_many <= $how_many_available) {
                     // echo 'available';
                     return array('status' => 'yes', 'message' => '');
                 } else {

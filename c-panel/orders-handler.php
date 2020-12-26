@@ -88,17 +88,27 @@ if (isset($_GET['remove_item'])) {
     $order_id = mysqli_real_escape_string($db->conn, $_GET['order_id']);
     $result = $db->setQuery("SELECT * FROM orderproducts WHERE productid='$item_id' AND orderid='$order_id';");
     $row = mysqli_fetch_assoc($result);
+
+    // add the quantity back to ite respective sections
+    if ($row['promotion_id'] != "empty" and $product->promotionExist($row['promotion_id'])) {
+        if ($product->productHaveVariation($item_id)) {
+            $product->increaseVariationStock($item_id, $row['size'], $row['howmany']);
+        }
+        $product->increasePromotionStock($item_id, $row['promotion_id'], $row['howmany']);
+    } else {
+        if ($product->productHaveVariation($item_id)) {
+            $product->increaseVariationStock($item_id, $row['size'], $row['howmany']);
+        } else {
+            $product->updateDetail($item_id, "howmany", $row['howmany'], "+");
+        }
+    }
+
     $total_price = $row['price'] * $row['howmany'];
     $seller_id = $row['sellerid'];
     $commission = $admin->calcItemCommission($row['price']) * $row['howmany'];
     $amount_remaining = $total_price - $commission;
-
-
     $seller->updateDetail($seller_id, "pendingbalance", $amount_remaining, "-");
-
     $admin->updateAdminDetail("pendingbalance", $commission, "-");
-
-    $product->updateDetail($item_id, "howmany", 1, "+");
 
     $db->setQuery("DELETE from orderproducts WHERE productid='$item_id' AND orderid='$order_id';");
 

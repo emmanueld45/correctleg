@@ -339,8 +339,23 @@ foreach ($sellers_array as $sellers) {
 //     echo "unavailable";
 // }
 
-if ($customer->haveShippingAddress($_SESSION['id'])) {
-    echo "yes";
-} else {
-    echo "no";
-}
+// if ($customer->haveShippingAddress($_SESSION['id'])) {
+//     echo "yes";
+// } else {
+//     echo "no";
+// }
+//echo $customer->getShippingAddressDetail("5edb7549a261a", "firstname");
+
+// $sql = "INSERT INTO ordercustomerdetails (orderid, firstname, lastname, email, phone, address1, address2, region) VALUES ('CL-273263', 'emmye', 'dan', 'emmy@gmail.com', '0816227387823', 'portharcout', 'igwuruta', 'Rivers');";
+// mysqli_query($conn, $sql);
+
+//$db->setQuery("UPDATE product SET howmany='10';");
+//setcookie("cl_cart", "yaya", time() - 2419200);
+//echo $product->getProductVariationQuantityFromSize("5fe226aab5627", "4.2");
+//echo $product->getProductVariationQuantityFromSize("5fe226aab5627", "4.3");
+
+// if ($product->itemIsAvailable("5fe226aab5627")) {
+//     echo 'yes';
+// } else {
+//     echo "no";
+// }

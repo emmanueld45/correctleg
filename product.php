@@ -646,7 +646,7 @@ $seller_id = get_item_seller_id($item_id);
 
                 <!-- product rating container start --->
                 <?php
-                $result = $db->setQuery("SELECT * FROM product_reviews WHERE product_id='$item_id';");
+                $result = $db->setQuery("SELECT * FROM product_reviews WHERE product_id='$item_id' AND status='Active';");
                 $numrows = mysqli_num_rows($result);
 
                 if ($numrows != 0) {
@@ -713,7 +713,7 @@ $seller_id = get_item_seller_id($item_id);
                     </div>
                     <div class="body-container">
                         <?php
-                        $result = $db->setQuery("SELECT * FROM product_reviews WHERE product_id='$item_id';");
+                        $result = $db->setQuery("SELECT * FROM product_reviews WHERE product_id='$item_id' AND status='Active';");
                         $numrows = mysqli_num_rows($result);
 
                         if ($numrows != 0) {
@@ -1237,10 +1237,10 @@ $seller_id = get_item_seller_id($item_id);
         })
 
 
-        show_click_loader();
-        $(document).ready(function() {
-            $(".click-loader").css("display", "none")
-        })
+        // show_click_loader();
+        // $(document).ready(function() {
+        //     $(".click-loader").css("display", "none")
+        // })
 
 
         $(".open-product-rating-modal-btn").click(function() {

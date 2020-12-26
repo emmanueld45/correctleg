@@ -16,6 +16,8 @@ if (!isset($_SESSION['admin_id'])) {
 
 $admin_id = $_SESSION['admin_id'];
 
+$item_id = $_GET['item_id'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -128,7 +130,7 @@ $admin_id = $_SESSION['admin_id'];
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-                <h1 class="mt-4">Retail items</h1>
+                <h1 class="mt-4">Reviews</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item active">Dashboard</li>
                 </ol>
@@ -145,7 +147,7 @@ $admin_id = $_SESSION['admin_id'];
 
 
                 <?php
-                $sql = "SELECT * FROM product WHERE status='active';";
+                $sql = "SELECT * FROM product_reviews WHERE  product_id='$item_id';";
                 $result = mysqli_query($conn, $sql);
                 $numrows = mysqli_num_rows($result);
 
@@ -155,23 +157,19 @@ $admin_id = $_SESSION['admin_id'];
                 <!-- table start -->
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-shopping-cart mr-1"></i>Retail items
+                        <i class="fas fa-shopping-cart mr-1"></i>Reviews
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
-                                        <th>Name</th>
-                                        <th>View</th>
-                                        <th>Seller</th>
-                                        <th>For</th>
-                                        <th>Price</th>
+                                        <th>Stars</th>
+                                        <th>Comment</th>
+                                        <th>status</th>
                                         <th>Date</th>
                                         <th>Action</th>
-                                        <th>Action</th>
-                                        <th>Reviews</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -180,26 +178,27 @@ $admin_id = $_SESSION['admin_id'];
                                         while ($row = mysqli_fetch_assoc($result)) {
                                     ?>
                                             <tr>
-                                                <td><img src="../<?php echo $row['image1']; ?>" class="item-img"></td>
-                                                <td><?php echo $row['name']; ?></td>
-                                                <td><a href="view-item.php?item_id=<?php echo $row['uniqueid']; ?>">View item</a></td>
-                                                <td><a href="view-seller.php?seller_id=<?php echo get_item_seller_id($row['uniqueid']); ?>">Visit seller</a></td>
-                                                <td><?php echo $row['itemisfor']; ?></td>
-                                                <td><?php echo "<span>&#8358</span>" . number_format($row['price']); ?></td>
-                                                <td><?php echo $row['date']; ?></td>
-                                                <td><a href="retail-items-handler.php?deactivate_item=true&item_id=<?php echo $row['uniqueid']; ?>" class="btn btn-danger">Deactivate</a></td>
-                                                <td><?php if (!$product->productHaveBeenOrdered($row['uniqueid'])) {
-                                                        echo "<a href='retail-items-handler.php?delete_item=true&item_id=" . $row['uniqueid'] . "' class='btn btn-danger'>Delete</a></td>";
-                                                    } ?>
-                                                <td><a href="item-reviews?item_id=<?php echo $row['uniqueid']; ?>" class="btn btn-info">Reviews (<?php echo $product->totalNumProductReviews($row['uniqueid']); ?>)</a></td>
 
+                                                <td><?php echo $row['number_of_stars']; ?></td>
+                                                <td><?php echo $row['comment']; ?></td>
+                                                <td><?php echo $row['status']; ?></td>
+                                                <td><?php echo $row['date']; ?></td>
+                                                <td>
+                                                    <?php
+                                                    if ($row['status'] == "Active") {
+                                                        echo "<a href='item-reviews?item_id=$item_id&review_id=" . $row['id'] . "&hide_review' class='btn btn-danger'>Hide?</a>";
+                                                    } else {
+                                                        echo "<a href='item-reviews?item_id=$item_id&review_id=" . $row['id'] . "&show_review' class='btn btn-success'>Show?</a>";
+                                                    }
+                                                    ?>
+                                                </td>
                                             </tr>
                                     <?php
                                         }
                                     } else {
                                         echo "<div style='width:100%;'>
                                         <div style='width:100%;padding:10px;text-align:center;font-size:60px;color:lightgrey'><i class='fa fa-shopping-cart'></i></div>
-                                        <div style='width:100%;padding:10px;text-align:center;font-size:60px;color:lightgrey'>No Active items yet!</div>
+                                        <div style='width:100%;padding:10px;text-align:center;font-size:60px;color:lightgrey'>No Review yet!</div>
                                         </div>";
                                     }
                                     ?>
@@ -224,16 +223,39 @@ $admin_id = $_SESSION['admin_id'];
 
 
     <?php
-    if (isset($_GET['item_deactivated'])) {
+    if (isset($_GET['review_shwon'])) {
         echo "<div class='alert alert-danger' style='position:fixed;top:0px;right:10px;z-index:10000;'>
-item <span class='alert-link'>successfully deactivated!</span>
+ <span class='alert-link'>Review shown!</span>
 </div>";
     }
 
-    if (isset($_GET['item_deleted'])) {
+    if (isset($_GET['review_hidden'])) {
         echo "<div class='alert alert-danger' style='position:fixed;top:0px;right:10px;z-index:10000;'>
-item <span class='alert-link'>successfully deleted!</span>
+ <span class='alert-link'>Review hidden!</span>
 </div>";
+    }
+    ?>
+
+
+
+    <?php
+
+    if (isset($_GET['hide_review'])) {
+        $review_id = $_GET['review_id'];
+        $item_id = $_GET['item_id'];
+
+        $db->setQuery("UPDATE product_reviews SET status='Pending' WHERE id='$review_id';");
+
+        $admin->goToPage("item-reviews", "item_id=$item_id&review_hidden");
+    }
+
+    if (isset($_GET['show_review'])) {
+        $review_id = $_GET['review_id'];
+        $item_id = $_GET['item_id'];
+
+        $db->setQuery("UPDATE product_reviews SET status='Active' WHERE id='$review_id';");
+
+        $admin->goToPage("item-reviews", "item_id=$item_id&review_shown");
     }
     ?>
 
@@ -248,4 +270,4 @@ item <span class='alert-link'>successfully deleted!</span>
     <script src="assets/demo/datatables-demo.js"></script>
 </body>
 
-</html>
+</html>i

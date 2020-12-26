@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2020 at 04:04 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.7
+-- Generation Time: Dec 26, 2020 at 02:33 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `correctleg`
+-- Database: `correctleg1`
 --
 
 -- --------------------------------------------------------
@@ -41,7 +40,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `uniqueid`, `activebalance`, `pendingbalance`, `clearancesale`) VALUES
-(1, '5ee5d1397026a', '4200', '4700', 'On');
+(1, '5ee5d1397026a', '4200', '15400', 'On');
 
 -- --------------------------------------------------------
 
@@ -377,45 +376,9 @@ CREATE TABLE `ordercustomerdetails` (
 --
 
 INSERT INTO `ordercustomerdetails` (`id`, `orderid`, `firstname`, `lastname`, `email`, `phone`, `address1`, `address2`, `region`) VALUES
-(31, 'cl-56206703', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', '', '', ''),
-(32, 'cl-75385707', 'John', 'Doe', 'johndoe@gmail.com', '08162383712', '', '', ''),
-(33, 'cl-76750108', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', '', '', ''),
-(34, 'cl-27366593', 'Mary', 'Ken', 'mary@gmail.com', '08162383712', 'No.1, Elzazi plaza abalajam, woji PortHarcourt', 'Not added', 'Rivers'),
-(35, 'cl-57521566', 'Okoro', 'Joes', 'okoro@gmail.com', '08162712782', '', '', ''),
-(36, 'cl-63788657', 'Ken', 'Sarao', 'ken@gmail.com', '08162718280', '', '', ''),
-(37, 'cl-29209394', 'Ken', 'Sarao', 'ken@gmail.com', '08162718280', '', '', ''),
-(38, 'cl-56615939', 'Benny', 'Jake', 'ogapredictor@gmail.com', '08162383712', '', '', ''),
-(39, 'cl-44001197', 'Benny', 'Jake', 'ogapredictor@gmail.com', '08162383712', '', '', ''),
-(40, 'cl-98903001', 'Bob', 'Joe', 'ogapredictor@gmail.com', '08162383712', '', '', ''),
-(41, 'cl-37641495', 'Jane', 'Ban', 'benny@gmail.com', '09018927182', '', '', ''),
-(42, 'cl-73433876', 'Kenny', 'James', 'kenny@gmail.com', '08067565667', '', '', ''),
-(43, 'cl-76619522', 'Copa', 'Jam', 'coppa@gmail.com', '08162383712', 'No.1, Elzazi plaza abalajam, woji PortHarcourt', 'Not added', 'Rivers'),
-(44, 'cl-31401574', 'Mary', 'Jane', 'pagaprofit@gmail.com', '08162718280', 'No.1, Elzazi plaza abalajam, woji PortHarcourt', 'Not added', 'Rivers'),
-(45, 'cl-50765933', 'Paul', 'Walker', 'pagaprofit@gmail.com', '08162718280', 'No.1, Elzazi plaza abalajam, woji PortHarcourt', 'Not added', 'Rivers'),
-(46, 'cl-39433989', '', '', '', '', '', '', ''),
-(47, 'cl-64065436', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', 'Bayelsa'),
-(48, 'cl-68604141', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', 'Bayelsa'),
-(49, 'cl-51406965', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', 'Bayelsa'),
-(50, 'cl-40559604', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', 'Bayelsa'),
-(51, 'cl-69662950', 'Okoro', 'Kin', 't-pepple@yahoo.com', '08011111111', 'Rivers State University ', '', 'Rivers'),
-(52, 'cl-91470863', 'Okoro', 'Ezekiel', 'okoro@gmail.com', '08012716726', 'Rivers State University ', '', 'Rivers'),
-(53, 'cl-18058740', 'Emmy', 'Dan', 'emmy@gmail.com', '8162383712', 'Rivers State University ', '', 'Rivers'),
-(54, 'cl-14922163', 'James', 'Ok', 'emmy@gmail.com', '09061756282', 'Rivers State University ', '', 'Rivers'),
-(55, 'cl-67348323', 'Banny', 'Kin', 'emmy@gmail.com', '08012716726', 'Rivers State University ', '', 'Rivers'),
-(56, 'cl-30278547', 'Manny', 'Boe', 'banny@gmail.com', '08162383712', 'Ikenga\'s compound', '', 'Rivers'),
-(57, 'cl-35956137', 'johnny', 'jan', 'jan@gmail.com', '09030643105', 'Rivers State University ', '', 'Rivers'),
-(58, 'cl-12835462', 'Kin', 'OPpy', 'obi@gmail.com', '08011111111', 'Rivers State University ', '', 'Rivers'),
-(59, 'cl-32629246', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', 'Bayelsa'),
-(60, 'cl-50221252', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', 'Bayelsa'),
-(61, 'cl-76035344', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', 'Bayelsa'),
-(62, 'cl-57811764', 'Aminigbo', 'Paul', 'ritzypaulmichael81@gmail.com', '09011684637', 'no. 1 aminibros close ph', '', 'Rivers'),
-(63, 'cl-25568789', 'Okon', 'Paul', 'ritzypaulmichael81@gmail.com', '09011684637', 'no. 1 aminibros close ph', '', 'Rivers'),
-(64, 'cl-29672839', 'Bemmy', 'Jon', 'ritzypaulmichael81@gmail.com', '09011684637', 'no. 1 aminibros close ph', '', 'Rivers'),
-(65, 'cl-50267406', 'Aminigbo', 'Paul', 'ritzypaulmichael81@gmail.com', '09011684637', 'no. 1 aminibros close ph', '', 'Rivers'),
-(66, 'cl-44167177', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', 'Bayelsa'),
-(67, 'cl-84837444', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', 'Bayelsa'),
-(68, 'cl-64173662', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', 'Bayelsa'),
-(69, 'cl-18150052', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Portharcourt', 'Not added', '');
+(83, 'cl-41840675', 'Okorokwo', 'Ezekiel', 'emmy@gmail.com', '8167407120', 'Rivers State University ', 'Ikenga\'s compound', 'Rivers'),
+(84, 'cl-79731538', 'Okorokwo', 'Ezekiel', 'emmy@gmail.com', '8167407120', 'Rivers State University ', 'Ikenga\'s compound', 'Rivers'),
+(85, 'cl-83104896', 'Okorokwo', 'Ezekiel', 'emmy@gmail.com', '8167407120', 'Rivers State University ', 'Ikenga\'s compound', 'Rivers');
 
 -- --------------------------------------------------------
 
@@ -428,26 +391,6 @@ CREATE TABLE `orderpickupstation` (
   `orderid` varchar(500) NOT NULL,
   `stationid` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `orderpickupstation`
---
-
-INSERT INTO `orderpickupstation` (`id`, `orderid`, `stationid`) VALUES
-(48, 'cl-35506473', '1'),
-(49, 'cl-56206703', '1'),
-(50, 'cl-57521566', '1'),
-(51, 'cl-63788657', '1'),
-(52, 'cl-29209394', '1'),
-(53, 'cl-56615939', '1'),
-(54, 'cl-44001197', '1'),
-(55, 'cl-98903001', '1'),
-(56, 'cl-73433876', '1'),
-(57, 'cl-76619522', '1'),
-(58, 'cl-31401574', '1'),
-(59, 'cl-50765933', '1'),
-(60, 'cl-68604141', '1'),
-(61, 'cl-40559604', '1');
 
 -- --------------------------------------------------------
 
@@ -464,6 +407,7 @@ CREATE TABLE `orderproducts` (
   `howmany` varchar(500) NOT NULL,
   `price` varchar(500) NOT NULL,
   `size` varchar(500) NOT NULL,
+  `promotion_id` varchar(500) NOT NULL,
   `status` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -471,27 +415,8 @@ CREATE TABLE `orderproducts` (
 -- Dumping data for table `orderproducts`
 --
 
-INSERT INTO `orderproducts` (`id`, `orderid`, `productid`, `sellerid`, `customerid`, `howmany`, `price`, `size`, `status`) VALUES
-(185, 'cl-51406965', '5edbff73de66f', '5edb748676d36', '5edb7549a261a', '1', '7000', '', 'Active'),
-(186, 'cl-40559604', '5edbffe41ecfa', '5edb748676d36', '5edb7549a261a', '1', '3000', '', 'Active'),
-(187, 'cl-69662950', '5edbff73de66f', '5edb748676d36', 'Unknown', '2', '7000', '', 'Active'),
-(188, 'cl-91470863', '5edbff73de66f', '5edb748676d36', 'Unknown', '1', '7000', '', 'Active'),
-(189, 'cl-91470863', '5edbffe41ecfa', '5edb748676d36', 'Unknown', '1', '3000', '', 'Active'),
-(190, 'cl-91470863', '5eebe41f69634', '5edb748676d36', 'Unknown', '1', '3500', '', 'Active'),
-(191, 'cl-18058740', '5fddb0b480067', '5fddafa0abef3', 'Unknown', '2', '2000', '', 'Active'),
-(192, 'cl-14922163', '5fddb0b480067', '5fddafa0abef3', 'Unknown', '1', '2000', '', 'Active'),
-(193, 'cl-67348323', '5fddb0b480067', '5fddafa0abef3', 'Unknown', '2', '1600', '', 'Active'),
-(194, 'cl-30278547', '5fddb0b480067', '5fddafa0abef3', 'Unknown', '2', '1600', '', 'Active'),
-(195, 'cl-35956137', '5fddb0b480067', '5fddafa0abef3', 'Unknown', '2', '1600', '', 'Active'),
-(196, 'cl-12835462', '5fddb0b480067', '5fddafa0abef3', 'Unknown', '2', '2000', '', 'Settled'),
-(199, 'cl-76035344', '5fddebf3525ca', '5fddeb4a339e1', '5edb7549a261a', '3', '1000', '', 'Settled'),
-(200, 'cl-57811764', '5edbff73de66f', '5edb748676d36', 'Unknown', '3', '7000', '', 'Active'),
-(201, 'cl-25568789', '5eebe41f69634', '5edb748676d36', 'Unknown', '2', '3500', '', 'Active'),
-(203, 'cl-50267406', '5edbff73de66f', '5edb748676d36', 'Unknown', '1', '7000', '', 'Active'),
-(204, 'cl-44167177', '5edbff73de66f', '5edb748676d36', '5edb7549a261a', '1', '7000', '', 'Settled'),
-(205, 'cl-84837444', '5eebe41f69634', '5edb748676d36', '5edb7549a261a', '1', '3500', '', 'Settled'),
-(206, 'cl-64173662', '5ef5f1287e34e', '5edb748676d36', '5edb7549a261a', '1', '4500', '', 'Settled'),
-(207, 'cl-18150052', '5edbff73de66f', '5edb748676d36', '5edb7549a261a', '1', '7000', '', 'Active');
+INSERT INTO `orderproducts` (`id`, `orderid`, `productid`, `sellerid`, `customerid`, `howmany`, `price`, `size`, `promotion_id`, `status`) VALUES
+(237, 'cl-83104896', '5edbff73de66f', '5edb748676d36', '5edb7549a261a', '2', '7000', '45', 'empty', 'Active');
 
 -- --------------------------------------------------------
 
@@ -521,24 +446,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `orderid`, `customerid`, `deliverymethod`, `paymentmethod`, `status`, `shipping_fee`, `coupon_amount`, `time`, `date`, `timeview`, `time_created`, `adminnew`, `new`) VALUES
-(113, 'cl-51406965', '5edb7549a261a', 'Door', 'deliverypayment', 'Active', '500', '0', '1608138476', '16/12/20', '5:07 PM', 'Wednesday, December 16, 2020', 'no', 'yes'),
-(114, 'cl-40559604', '5edb7549a261a', 'Pickup', 'deliverypayment', 'Active', '500', '0', '1608138834', '16/12/20', '5:13 PM', 'Wednesday, December 16, 2020', 'no', 'yes'),
-(115, 'cl-69662950', 'Unknown', 'Door', 'deliverypayment', 'Active', '0', '0', '1608155115', '16/12/20', '9:45 PM', 'Wednesday, December 16, 2020', 'no', 'yes'),
-(116, 'cl-91470863', 'Unknown', 'Door', 'onlinepayment', 'Active', '0', '0', '1608223289', '17/12/20', '4:41 PM', 'Thursday, December 17, 2020', 'no', 'yes'),
-(117, 'cl-18058740', 'Unknown', 'Door', 'deliverypayment', 'Active', '0', '0', '1608364575', '19/12/20', '7:56 AM', 'Saturday, December 19, 2020', 'no', 'yes'),
-(118, 'cl-14922163', 'Unknown', 'Door', 'deliverypayment', 'Active', '0', '0', '1608369619', '19/12/20', '9:20 AM', 'Saturday, December 19, 2020', 'no', 'yes'),
-(119, 'cl-67348323', 'Unknown', 'Door', 'deliverypayment', 'Active', '0', '0', '1608370002', '19/12/20', '9:26 AM', 'Saturday, December 19, 2020', 'no', 'yes'),
-(120, 'cl-30278547', 'Unknown', 'Door', 'deliverypayment', 'Active', '0', '0', '1608370737', '19/12/20', '9:38 AM', 'Saturday, December 19, 2020', 'no', 'yes'),
-(121, 'cl-35956137', 'Unknown', 'Door', 'deliverypayment', 'Active', '0', '0', '1608371240', '19/12/20', '9:47 AM', 'Saturday, December 19, 2020', 'no', 'yes'),
-(122, 'cl-12835462', 'Unknown', 'Door', 'deliverypayment', 'Active', '0', '0', '1608373279', '19/12/20', '10:21 AM', 'Saturday, December 19, 2020', 'no', 'yes'),
-(125, 'cl-76035344', '5edb7549a261a', 'Door', 'deliverypayment', 'Active', '500', '0', '1608382809', '19/12/20', '1:00 PM', 'Saturday, December 19, 2020', 'no', 'yes'),
-(126, 'cl-57811764', 'Unknown', 'Door', 'deliverypayment', 'Active', '0', '0', '1608412746', '19/12/20', '9:19 PM', 'Saturday, December 19, 2020', 'no', 'yes'),
-(127, 'cl-25568789', 'Unknown', 'Door', 'deliverypayment', 'Active', '0', '0', '1608415209', '19/12/20', '10:00 PM', 'Saturday, December 19, 2020', 'no', 'yes'),
-(129, 'cl-50267406', 'Unknown', 'Door', 'deliverypayment', 'Active', '0', '0', '1608417055', '19/12/20', '10:30 PM', 'Saturday, December 19, 2020', 'no', 'yes'),
-(130, 'cl-44167177', '5edb7549a261a', 'Door', 'deliverypayment', 'Active', '500', '0', '1608560372', '21/12/20', '2:19 PM', 'Monday, December 21, 2020', 'no', 'yes'),
-(131, 'cl-84837444', '5edb7549a261a', 'Door', 'deliverypayment', 'Active', '500', '0', '1608560681', '21/12/20', '2:24 PM', 'Monday, December 21, 2020', 'no', 'yes'),
-(132, 'cl-64173662', '5edb7549a261a', 'Door', 'deliverypayment', 'Active', '500', '0', '1608563835', '21/12/20', '3:17 PM', 'Monday, December 21, 2020', 'no', 'yes'),
-(133, 'cl-18150052', '5edb7549a261a', 'Door', 'deliverypayment', 'Active', '500', '0', '1608582138', '21/12/20', '8:22 PM', 'Monday, December 21, 2020', 'no', 'yes');
+(159, 'cl-83104896', '5edb7549a261a', 'Door step delivery', 'pay on delivery', 'Active', '0', '0', '1608980429', '26/12/20', '11:00 PM', 'Saturday, December 26, 2020', 'yes', 'yes');
 
 -- --------------------------------------------------------
 
@@ -564,30 +472,9 @@ CREATE TABLE `ordershippingaddress` (
 --
 
 INSERT INTO `ordershippingaddress` (`id`, `orderid`, `firstname`, `lastname`, `email`, `phone`, `additionalphone`, `address1`, `region`, `address2`) VALUES
-(52, 'cl-75385707', 'John', 'Doe', 'johndoe@gmail.com', '08162383712', '', 'Old GRA portharcourt', 'Cross River', 'Port'),
-(53, 'cl-76750108', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', '09087127681', 'Portharcourt', 'Rivers', ''),
-(54, 'cl-27366593', 'Mary', 'Ken', 'mary@gmail.com', '08162383712', '', 'Old GRA portharcourt', 'Enugu', 'Romuola'),
-(55, 'cl-64065436', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Not added', 'Portharcourt', 'Bayelsa', 'Not added'),
-(56, 'cl-51406965', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Not added', 'Portharcourt', 'Bayelsa', 'Not added'),
-(57, 'cl-69662950', 'Okoro', 'Kin', 't-pepple@yahoo.com', '08011111111', '', 'Rivers State University ', 'Rivers', ''),
-(58, 'cl-91470863', 'Okoro', 'Ezekiel', 'okoro@gmail.com', '08012716726', '', 'Rivers State University ', 'Rivers', ''),
-(59, 'cl-18058740', 'Emmy', 'Dan', 'emmy@gmail.com', '8162383712', '', 'Rivers State University ', 'Rivers', ''),
-(60, 'cl-14922163', 'James', 'Ok', 'emmy@gmail.com', '09061756282', '', 'Rivers State University ', 'Rivers', ''),
-(61, 'cl-67348323', 'Banny', 'Kin', 'emmy@gmail.com', '08012716726', '', 'Rivers State University ', 'Rivers', ''),
-(62, 'cl-30278547', 'Manny', 'Boe', 'banny@gmail.com', '08162383712', '', 'Ikenga\'s compound', 'Rivers', ''),
-(63, 'cl-35956137', 'johnny', 'jan', 'jan@gmail.com', '09030643105', '', 'Rivers State University ', 'Rivers', ''),
-(64, 'cl-12835462', 'Kin', 'OPpy', 'obi@gmail.com', '08011111111', '', 'Rivers State University ', 'Rivers', ''),
-(65, 'cl-32629246', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Not added', 'Portharcourt', 'Bayelsa', 'Not added'),
-(66, 'cl-50221252', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Not added', 'Portharcourt', 'Bayelsa', 'Not added'),
-(67, 'cl-76035344', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Not added', 'Portharcourt', 'Bayelsa', 'Not added'),
-(68, 'cl-57811764', 'Aminigbo', 'Paul', 'ritzypaulmichael81@gmail.com', '09011684637', '', 'no. 1 aminibros close ph', 'Rivers', ''),
-(69, 'cl-25568789', 'Okon', 'Paul', 'ritzypaulmichael81@gmail.com', '09011684637', '', 'no. 1 aminibros close ph', 'Rivers', ''),
-(70, 'cl-29672839', 'Bemmy', 'Jon', 'ritzypaulmichael81@gmail.com', '09011684637', '', 'no. 1 aminibros close ph', 'Rivers', ''),
-(71, 'cl-50267406', 'Aminigbo', 'Paul', 'ritzypaulmichael81@gmail.com', '09011684637', '', 'no. 1 aminibros close ph', 'Rivers', ''),
-(72, 'cl-44167177', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Not added', 'Portharcourt', 'Bayelsa', 'Not added'),
-(73, 'cl-84837444', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Not added', 'Portharcourt', 'Bayelsa', 'Not added'),
-(74, 'cl-64173662', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Not added', 'Portharcourt', 'Bayelsa', 'Not added'),
-(75, 'cl-18150052', 'Emmanuel', 'Danjumbo', 'emmydanjumbo4@gmail.com', '08162383712', 'Not added', 'Portharcourt', '', 'Not added');
+(88, 'cl-41840675', 'Okorokwo', 'Ezekiel', 'emmy@gmail.com', '8167407120', '09024145808', 'Rivers State University ', 'Rivers', 'Ikenga\'s compound'),
+(89, 'cl-79731538', 'Okorokwo', 'Ezekiel', 'emmy@gmail.com', '8167407120', '09024145808', 'Rivers State University ', 'Rivers', 'Ikenga\'s compound'),
+(90, 'cl-83104896', 'Okorokwo', 'Ezekiel', 'emmy@gmail.com', '8167407120', '09024145808', 'Rivers State University ', 'Rivers', 'Ikenga\'s compound');
 
 -- --------------------------------------------------------
 
@@ -672,31 +559,30 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `uniqueid`, `sellerid`, `name`, `description`, `image1`, `image2`, `image3`, `image4`, `image5`, `itemisfor`, `itemtype`, `color`, `size`, `brandname`, `howmany`, `price`, `old_price`, `time`, `date`, `status`, `productcode`, `exclusive`, `views`, `stars`) VALUES
-(5, '5edbff73de66f', '5edb748676d36', 'Nice Shoe', 'Nice shoe, buy it now!.....', 'productimages/foot6.jpg', 'productimages/footbanner1.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Blue', '45', 'Shoe dealer', '0', '7000', '2000', '1591476083', '06-06-20', 'active', '8OL5', 'no', '148', '3'),
-(6, '5edbffe41ecfa', '5edb748676d36', 'Cool slippers', 'This is a cool slippers you will love', 'productimages/foot10.jpg', 'productimages/foot9.jpg', 'empty', 'empty', 'empty', 'Women', 'Slippers', 'Grey', '3.3', 'Slippers Dealer', '0', '3000', '2000', '1591476196', '06-06-20', 'active', '68ER', 'no', '15993', '3'),
-(7, '5edc04c1a6e89', '5edb748676d36', 'Ultra shoe', 'This is an ultra shoe', 'productimages/foot3.jpg', 'productimages/foot8.jpg', 'empty', 'empty', 'empty', 'Men', 'Shoes', 'Red', '3.2', 'Shoe dealer', '5', '17000', '2000', '1591477441', '06-06-20', 'active', 'B6E7', 'yes', '42', '3'),
-(8, '5ee20b9f768f1', '5edb8099d21a7', 'High heel shoe', 'This is a very nice high heeled shoe', 'productimages/foot4.jpg', 'productimages/foot7.jpg', 'productimages/footbanner1.jpg', 'empty', 'empty', 'Women', 'Heels', 'Black', '35', 'High Heel Dealers', '0', '4000', '2000', '1591872415', '11-06-20', 'active', '23NA', 'no', '64', '3'),
-(9, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '3', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '67', '3'),
-(10, '5ef5f1287e34e', '5edb748676d36', 'Nike shoe', 'This is the description', 'productimages/foot2.jpg', 'productimages/foot4.jpg', 'empty', 'empty', 'empty', 'Men', 'Snickers', 'Red', '39', 'Nike', '5', '4500', '6000', '1593176360', '26-06-20', 'active', '8D0F', 'no', '28', '3'),
-(15, '5edbff73de66f', '5edb748676d36', 'Nice Shoe', 'Nice shoe, buy it now!.....', 'productimages/foot6.jpg', 'productimages/footbanner1.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Blue', '45', 'Shoe dealer', '0', '7000', '2000', '1591476083', '06-06-20', 'active', '8OL5', 'no', '148', '3'),
-(16, '5edbffe41ecfa', '5edb748676d36', 'Cool slippers', 'This is a cool slippers you will love', 'productimages/foot10.jpg', 'productimages/foot9.jpg', 'empty', 'empty', 'empty', 'Women', 'Slippers', 'Grey', '3.3', 'Slippers Dealer', '0', '3000', '2000', '1591476196', '06-06-20', 'active', '68ER', 'no', '15993', '3'),
-(17, '5edc04c1a6e89', '5edb748676d36', 'Ultra shoe', 'This is an ultra shoe', 'productimages/foot3.jpg', 'productimages/foot8.jpg', 'empty', 'empty', 'empty', 'Men', 'Shoes', 'Red', '3.2', 'Shoe dealer', '5', '17000', '2000', '1591477441', '06-06-20', 'active', 'B6E7', 'yes', '42', '3'),
-(18, '5ee20b9f768f1', '5edb8099d21a7', 'High heel shoe', 'This is a very nice high heeled shoe', 'productimages/foot4.jpg', 'productimages/foot7.jpg', 'productimages/footbanner1.jpg', 'empty', 'empty', 'Women', 'Heels', 'Black', '35', 'High Heel Dealers', '10', '4000', '2000', '1591872415', '11-06-20', 'active', '23NA', 'no', '64', '3'),
-(19, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '3', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '67', '3'),
-(20, '5ef5f1287e34e', '5edb748676d36', 'Nike shoe', 'This is the description', 'productimages/foot2.jpg', 'productimages/foot4.jpg', 'empty', 'empty', 'empty', 'Men', 'Snickers', 'Red', '39', 'Nike', '5', '4500', '6000', '1593176360', '26-06-20', 'active', '8D0F', 'no', '28', '3'),
-(22, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '3', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '67', '3'),
-(23, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '3', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '67', '3'),
-(24, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '3', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '67', '3'),
-(25, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '3', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '67', '3'),
-(26, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '3', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '67', '3'),
-(27, '5fd1b46116e84', '5fd1abfb3fd59', 'Home made shoe', 'This is the description of this home made shoe', 'productimages/banner1.jpg', 'productimages/breadcrumb.jpg', 'empty', 'empty', 'empty', 'Men', 'Pam slippers', 'Black', '42', 'Homemades', '7', '4500', '5000', '1607578721', '10-12-20', 'active', 'R42B', 'no', '18', ''),
-(29, '5fd87038af2e3', '5edb748676d36', 'Classic shoe', 'This is the description', 'productimages/5fdd23514e20bfoot6.jpg', 'empty', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Black', '42', 'Mr. Classic', '4', '2500', '4500', '1608020024', '15-12-20', 'active', '2RS5', 'no', '38', '3'),
-(30, '5fddb0b480067', '5fddafa0abef3', 'Fav item1', 'This is the description of my fave item', 'productimages/5fddb0b480067footbanner6.jpg', 'productimages/5fddb0b480067cat-1.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Black', '42', 'Fav stores', '7', '2000', '5000', '1608364212', '19-12-20', 'active', '76NQ', 'no', '55', '3'),
-(31, '5fddebf3525ca', '5fddeb4a339e1', 'Correctleg Yakata', 'This is the description', 'productimages/5fddebf3525cacart-1.jpg', 'productimages/5fddebf3525cacart-3.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Black', '42', 'Correctleg', '2', '1000', '3000', '1608379379', '19-12-20', 'active', '8FX6', 'no', '35', '3'),
-(32, '5fe07ec5d6700', '5fddeb4a339e1', 'Good shoe', 'This is the description', 'productimages/5fe07ec5d6700footbanner6.jpg', 'empty', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Black', '42', 'Brand', '5', '8000', '12000', '1608548037', '21-12-20', 'inactive', 'X6D5', 'no', '31', '3'),
-(33, '5fe19810ddf9f', '5edb748676d36', 'Better shoe', '<p>This is the <strong>dscription&nbsp;</strong>of this item, so please just take it as you see it cause i dont have strength to start typing long things abeg abeg.. thanks for you co-operation and support</p><ol><li>Strong and reliable</li><li>Fast and secure</li><li>Aweomely beautiful</li></ol><p>These are just but a few things to mention about this item</p><p>Pusrchase this shoe today before 25th December 2020 and get a 10% discount on all orders!</p>', 'productimages/5fe19810ddf9f1 (1).jpg', 'productimages/5fe19810ddf9f5.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'White', '42', 'empty', '3', '5000', '7000', '1608620048', '22-12-20', 'active', 'IU82', 'no', '52', '3'),
-(34, '5fe22635c5fe8', '5edb748676d36', 'Blue confirm shoe', '<p>This is the description</p>', 'productimages/5fe22635c5fe8banner5.jpeg', 'productimages/5fe22635c5fe8foot5.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'White', '42', 'empty', '3', '4000', '9000', '1608656437', '22-12-20', 'active', 'J09I', 'no', '33', '3'),
-(35, '5fe226aab5627', '5edb748676d36', 'Aminigbo Pauls shoe', '<p>This is the description</p>', 'productimages/5fe226aab5627banner4.jpg', 'productimages/5fe226aab5627Clearance-img.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'White', '42', 'empty', '5', '3000', '7000', '1608656554', '22-12-20', 'active', '4G4D', 'no', '88', '3');
+(5, '5edbff73de66f', '5edb748676d36', 'Nice Shoe', 'Nice shoe, buy it now!.....', 'productimages/foot6.jpg', 'productimages/footbanner1.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Blue', '45', 'Shoe dealer', '8', '7000', '2000', '1591476083', '06-06-20', 'active', '8OL5', 'no', '172', '3'),
+(6, '5edbffe41ecfa', '5edb748676d36', 'Cool slippers', 'This is a cool slippers you will love', 'productimages/foot10.jpg', 'productimages/foot9.jpg', 'empty', 'empty', 'empty', 'Women', 'Slippers', 'Grey', '3.3', 'Slippers Dealer', '10', '3000', '2000', '1591476196', '06-06-20', 'active', '68ER', 'no', '15994', '3'),
+(7, '5edc04c1a6e89', '5edb748676d36', 'Ultra shoe', 'This is an ultra shoe', 'productimages/foot3.jpg', 'productimages/foot8.jpg', 'empty', 'empty', 'empty', 'Men', 'Shoes', 'Red', '3.2', 'Shoe dealer', '10', '17000', '2000', '1591477441', '06-06-20', 'active', 'B6E7', 'yes', '44', '3'),
+(8, '5ee20b9f768f1', '5edb8099d21a7', 'High heel shoe', 'This is a very nice high heeled shoe', 'productimages/foot4.jpg', 'productimages/foot7.jpg', 'productimages/footbanner1.jpg', 'empty', 'empty', 'Women', 'Heels', 'Black', '35', 'High Heel Dealers', '10', '4000', '2000', '1591872415', '11-06-20', 'active', '23NA', 'no', '67', '3'),
+(9, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '10', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '84', '3'),
+(10, '5ef5f1287e34e', '5edb748676d36', 'Nike shoe', 'This is the description', 'productimages/foot2.jpg', 'productimages/foot4.jpg', 'empty', 'empty', 'empty', 'Men', 'Snickers', 'Red', '39', 'Nike', '10', '4500', '6000', '1593176360', '26-06-20', 'active', '8D0F', 'no', '35', '3'),
+(15, '5edbff73de66f', '5edb748676d36', 'Nice Shoe', 'Nice shoe, buy it now!.....', 'productimages/foot6.jpg', 'productimages/footbanner1.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Blue', '45', 'Shoe dealer', '8', '7000', '2000', '1591476083', '06-06-20', 'active', '8OL5', 'no', '172', '3'),
+(16, '5edbffe41ecfa', '5edb748676d36', 'Cool slippers', 'This is a cool slippers you will love', 'productimages/foot10.jpg', 'productimages/foot9.jpg', 'empty', 'empty', 'empty', 'Women', 'Slippers', 'Grey', '3.3', 'Slippers Dealer', '10', '3000', '2000', '1591476196', '06-06-20', 'active', '68ER', 'no', '15994', '3'),
+(17, '5edc04c1a6e89', '5edb748676d36', 'Ultra shoe', 'This is an ultra shoe', 'productimages/foot3.jpg', 'productimages/foot8.jpg', 'empty', 'empty', 'empty', 'Men', 'Shoes', 'Red', '3.2', 'Shoe dealer', '10', '17000', '2000', '1591477441', '06-06-20', 'active', 'B6E7', 'yes', '44', '3'),
+(18, '5ee20b9f768f1', '5edb8099d21a7', 'High heel shoe', 'This is a very nice high heeled shoe', 'productimages/foot4.jpg', 'productimages/foot7.jpg', 'productimages/footbanner1.jpg', 'empty', 'empty', 'Women', 'Heels', 'Black', '35', 'High Heel Dealers', '10', '4000', '2000', '1591872415', '11-06-20', 'active', '23NA', 'no', '67', '3'),
+(19, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '10', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '84', '3'),
+(20, '5ef5f1287e34e', '5edb748676d36', 'Nike shoe', 'This is the description', 'productimages/foot2.jpg', 'productimages/foot4.jpg', 'empty', 'empty', 'empty', 'Men', 'Snickers', 'Red', '39', 'Nike', '10', '4500', '6000', '1593176360', '26-06-20', 'active', '8D0F', 'no', '35', '3'),
+(22, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '10', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '84', '3'),
+(23, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '10', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '84', '3'),
+(24, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '10', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '84', '3'),
+(25, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '10', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '84', '3'),
+(26, '5eebe41f69634', '5edb748676d36', 'Kids shoes', 'This is a fancy shoes for you kids to wear and look georgeous', 'productimages/foot8.jpg', 'productimages/footbanner6.jpg', 'empty', 'empty', 'empty', 'Kids', 'Snickers', 'Blue', '35', 'Kids Master', '10', '3500', '2000', '1592517663', '19-06-20', 'active', '72XG', 'no', '84', '3'),
+(27, '5fd1b46116e84', '5fd1abfb3fd59', 'Home made shoe', 'This is the description of this home made shoe', 'productimages/banner1.jpg', 'productimages/breadcrumb.jpg', 'empty', 'empty', 'empty', 'Men', 'Pam slippers', 'Black', '42', 'Homemades', '10', '4500', '5000', '1607578721', '10-12-20', 'active', 'R42B', 'no', '18', ''),
+(29, '5fd87038af2e3', '5edb748676d36', 'Classic shoe', 'This is the description', 'productimages/5fdd23514e20bfoot6.jpg', 'empty', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Black', '42', 'Mr. Classic', '10', '2500', '4500', '1608020024', '15-12-20', 'active', '2RS5', 'no', '38', '3'),
+(30, '5fddb0b480067', '5fddafa0abef3', 'Fav item1', 'This is the description of my fave item', 'productimages/5fddb0b480067footbanner6.jpg', 'productimages/5fddb0b480067cat-1.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Black', '42', 'Fav stores', '10', '2000', '5000', '1608364212', '19-12-20', 'active', '76NQ', 'no', '55', '3'),
+(31, '5fddebf3525ca', '5fddeb4a339e1', 'Correctleg Yakata', 'This is the description', 'productimages/5fddebf3525cacart-1.jpg', 'productimages/5fddebf3525cacart-3.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Black', '42', 'Correctleg', '10', '1000', '3000', '1608379379', '19-12-20', 'active', '8FX6', 'no', '36', '3'),
+(32, '5fe07ec5d6700', '5fddeb4a339e1', 'Good shoe', 'This is the description', 'productimages/5fe07ec5d6700footbanner6.jpg', 'empty', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'Black', '42', 'Brand', '10', '8000', '12000', '1608548037', '21-12-20', 'inactive', 'X6D5', 'no', '31', '3'),
+(33, '5fe19810ddf9f', '5edb748676d36', 'Better shoe', '<p>This is the <strong>description&nbsp;</strong>of this item, so please just take it as you see it cause i dont have strength to start typing long things abeg abeg.. thanks for you co-operation and support</p><ol><li>Strong and reliable</li><li>Fast and secure</li><li>Aweomely beautiful</li></ol><p>These are just but a few things to mention about this item</p><p>Pusrchase this shoe today before 25th December 2020 and get a 10% discount on all orders!</p>', 'productimages/5fe19810ddf9f1 (1).jpg', 'productimages/5fe19810ddf9f5.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'White', '42', 'empty', '10', '5000', '7000', '1608620048', '22-12-20', 'active', 'IU82', 'no', '54', '3'),
+(35, '5fe226aab5627', '5edb748676d36', 'Aminigbo Pauls shoe', '<p>This is the description</p>', 'productimages/5fe226aab5627banner4.jpg', 'productimages/5fe226aab5627Clearance-img.jpg', 'empty', 'empty', 'empty', 'Men', 'Sandals', 'White', '42', 'empty', '10', '3000', '7000', '1608656554', '22-12-20', 'active', '4G4D', 'no', '96', '3');
 
 -- --------------------------------------------------------
 
@@ -759,7 +645,7 @@ INSERT INTO `product_variations` (`id`, `product_id`, `size`, `price`, `quantity
 (5, '5fe226aab5627', '4.1', '3000', '10'),
 (7, '5fe22d598132e', '4.5', '7000', '10'),
 (8, '5fe226aab5627', '4.2', '4500', '3'),
-(9, '5fe226aab5627', '4.3', '6000', '2'),
+(9, '5fe226aab5627', '4.3', '6000', '1'),
 (10, '5fe226aab5627', '4.4', '6000', '10');
 
 -- --------------------------------------------------------
@@ -840,7 +726,9 @@ INSERT INTO `recentlyviewed` (`id`, `customerid`, `productid`) VALUES
 (17, '5edb748676d36', '5edc04c1a6e89'),
 (18, '5edb7549a261a', '5fddebf3525ca'),
 (19, '5edb7549a261a', '5ef5f1287e34e'),
-(20, '5edb7549a261a', '5fd87038af2e3');
+(20, '5edb7549a261a', '5fd87038af2e3'),
+(21, '5edb7549a261a', '5fe226aab5627'),
+(22, '5edb7549a261a', '5edc04c1a6e89');
 
 -- --------------------------------------------------------
 
@@ -882,7 +770,9 @@ CREATE TABLE `savedproducts` (
 
 INSERT INTO `savedproducts` (`id`, `customerid`, `productid`) VALUES
 (8, '5edb7549a261a', '5edc04c1a6e89'),
-(9, '5f0babcacf77f', '5ee20b9f768f1');
+(9, '5f0babcacf77f', '5ee20b9f768f1'),
+(18, '5edb7549a261a', '5edbff73de66f'),
+(21, '5edb7549a261a', '5fe226aab5627');
 
 -- --------------------------------------------------------
 
@@ -916,7 +806,7 @@ CREATE TABLE `sellers` (
 --
 
 INSERT INTO `sellers` (`id`, `uniqueid`, `firstname`, `lastname`, `image`, `email`, `phone`, `password`, `activebalance`, `pendingbalance`, `pendingwithdrawals`, `time`, `date`, `timeview`, `status`, `new`, `cid`, `subscribed`) VALUES
-(4, '5edb748676d36', 'Emmanuel', 'Danjumbo', '../sellerimages/defaultimage.png', 'emmy@gmail.com', '8162383733', '$2y$10$ITmoumn3hVxZ0FAXa.VjUO/w0rFL61cACgkhAzBAoSs0y1tT0Wq8W', '60050', '95700', '0', '1591440518', '06-06-20', '11:48 PM', 'active', 'yes', 'H48N', 'no'),
+(4, '5edb748676d36', 'Emmanuel', 'Danjumbo', '../sellerimages/defaultimage.png', 'emmy@gmail.com', '8162383733', '$2y$10$ITmoumn3hVxZ0FAXa.VjUO/w0rFL61cACgkhAzBAoSs0y1tT0Wq8W', '60050', '326500', '0', '1591440518', '06-06-20', '11:48 PM', 'active', 'yes', 'H48N', 'no'),
 (5, '5edb8099d21a7', 'Mary', 'brian', '../sellerimages/defaultimage.png', 'mary@gmail.com', '8756656790', '$2y$10$QugPrXFWJoRmUCG8ZCiZeOpVzd6BPbbkNdpuTnFbi2p.TnD9Zpz52', '7600', '-3800', '0', '1591443609', '06-06-20', '0:40 PM', 'inactive', 'yes', 'FR86', 'no'),
 (6, '5ef1d65fb8fb0', 'James', 'Ja', 'sellerimages/defaultimage.png', 'james@gmail.com', '8014897124891', '$2y$10$qPZS416pIEKkoi8.okbjW.Jhel9HIOjaPdTtL0JMy3e7UoMqbnGf6', '0', '0', '0', '1592907359', '23-06-20', '11:15 PM', 'inactive', 'yes', '3PG5', 'no'),
 (7, '5f06ede19846e', 'Stewart', 'Ezekiel ', 'sellerimages/defaultimage.png', 'ellaswart900@gmail.com', '9030643105', '$2y$10$5I6FkSpc.WtnSKg4IdBgEuV6rvqp0C1zW0TytkUd3YpzpCxK0oSai', '0', '0', '0', '1594289633', '09-07-20', '9:13 AM', 'inactive', 'yes', '0YE9', ''),
@@ -968,14 +858,7 @@ CREATE TABLE `shippingaddress` (
 
 INSERT INTO `shippingaddress` (`id`, `customerid`, `firstname`, `lastname`, `phone`, `additionalphone`, `email`, `address1`, `region`, `address2`, `status`) VALUES
 (2, '1234', 'John', 'Doe', '0807899', '0998967', 'johndoe@gmail.com', 'Ikenga', 'Rivers', 'Igwuruta', 'default'),
-(9, '5edb7549a261a', 'Emmanuel', 'Danjumbo', '08162383712', 'Not added', 'emmydanjumbo4@gmail.com', 'Portharcourt', 'Bayelsa', 'Not added', ''),
-(10, '5edb7549a261a', 'Emmanuel', 'Danjumbo', '08162383712', 'Not added', 'emmydanjumbo4@gmail.com', 'Portharcourt', 'Bayelsa', 'Not added', 'Default'),
-(11, '5edb7549a261a', 'Emmanuel', 'Danjumbo', '08162383712', 'Not added', 'emmydanjumbo4@gmail.com', 'Portharcourt', 'Bayelsa', 'Not added', 'Default'),
-(12, '5edb7549a261a', 'Emmanuel', 'Danjumbo', '08162383712', 'Not added', 'emmydanjumbo4@gmail.com', 'Portharcourt', 'Bayelsa', 'Not added', 'Default'),
-(13, '5edb7549a261a', 'Emmanuel', 'Danjumbo', '08162383712', 'Not added', 'emmydanjumbo4@gmail.com', 'Portharcourt', 'Bayelsa', 'Not added', 'Default'),
-(14, '5edb7549a261a', 'Emmanuel', 'Danjumbo', '08162383712', 'Not added', 'emmydanjumbo4@gmail.com', 'Portharcourt', 'Bayelsa', 'Not added', 'Default'),
-(15, '5edb7549a261a', 'Emmanuel', 'Danjumbo', '08162383712', 'Not added', 'emmydanjumbo4@gmail.com', 'Portharcourt', 'Bayelsa', 'Not added', 'Default'),
-(16, '5edb7549a261a', 'Emmanuel', 'Danjumbo', '08162383712', 'Not added', 'emmydanjumbo4@gmail.com', 'Portharcourt', '', 'Not added', 'Default');
+(19, '5edb7549a261a', 'Okorokwo', 'Ezekiel', '8167407120', '09024145808', 'emmy@gmail.com', 'Rivers State University ', 'Rivers', 'Ikenga\'s compound', 'default');
 
 -- --------------------------------------------------------
 
@@ -1348,7 +1231,7 @@ ALTER TABLE `footwear_type`
 -- AUTO_INCREMENT for table `ordercustomerdetails`
 --
 ALTER TABLE `ordercustomerdetails`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `orderpickupstation`
@@ -1360,19 +1243,19 @@ ALTER TABLE `orderpickupstation`
 -- AUTO_INCREMENT for table `orderproducts`
 --
 ALTER TABLE `orderproducts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=208;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 
 --
 -- AUTO_INCREMENT for table `ordershippingaddress`
 --
 ALTER TABLE `ordershippingaddress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=76;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `order_tracking_details`
@@ -1426,7 +1309,7 @@ ALTER TABLE `promotion_products`
 -- AUTO_INCREMENT for table `recentlyviewed`
 --
 ALTER TABLE `recentlyviewed`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `recoverpasswordkey`
@@ -1438,7 +1321,7 @@ ALTER TABLE `recoverpasswordkey`
 -- AUTO_INCREMENT for table `savedproducts`
 --
 ALTER TABLE `savedproducts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `sellers`
@@ -1450,7 +1333,7 @@ ALTER TABLE `sellers`
 -- AUTO_INCREMENT for table `shippingaddress`
 --
 ALTER TABLE `shippingaddress`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tourvideo`

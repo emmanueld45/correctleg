@@ -294,6 +294,7 @@ Below are some useful links to help you get started!.
                 
                 <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">Image</th>
                 <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">Name</th>
+                <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">Size</th>
                 <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">price</th>
                 <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">Quantity</th>
                 <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">Total price</th>
@@ -320,8 +321,9 @@ Below are some useful links to help you get started!.
         while ($row = mysqli_fetch_assoc($result)) {
             $item_id = $row['productid'];
             $image = get_item_detail($item_id, 'image1');
-            // $name = $row['name'];
+            $name = $row['name'];
             $price = $row['price'];
+            $size = $row['size'];
             $howmany = $row['howmany'];
             $total_price = $price * $howmany;
 
@@ -331,7 +333,8 @@ Below are some useful links to help you get started!.
 
             <tr style="margin-top:10px;margin-bottom:10px;">
             <td><img src="' . $this->website_url_http . '/' . $image . '" style="width:100px;height:100px;"></td>
-            <td>' . $firstname . '</td>
+            <td>' . $name . '</td>
+            <td>' . $size . '</td>
             <td><span>N</span>' . number_format($price) . '</td>
             <td>' . $howmany . '</td>
             <td><span>N</span>' . number_format($total_price) . '</td>
@@ -395,17 +398,17 @@ Below are some useful links to help you get started!.
 
 
         $delivery_method = get_order_delivery_method($orderid);
-        $message .= 'delivery Method: ' . $delivery_method . ' delivery';
+        $message .= 'delivery Method: ' . $delivery_method;
 
-        if ($delivery_method == "Pickup") {
-            $station_id = get_pickup_station_id($orderid);
-            $station_location = get_pickup_station_detail($station_id, 'station');
+        // if ($delivery_method == "Pickup") {
+        //     $station_id = get_pickup_station_id($orderid);
+        //     $station_location = get_pickup_station_detail($station_id, 'station');
 
-            $message .= ' <br><br><span style="font-weight:bold;">Pickup Delivery</span><br>
-            <span>Location: ' . $station_location . '</span><br> ';
-        }
+        //     $message .= ' <br><br><span style="font-weight:bold;">Pickup Delivery</span><br>
+        //     <span>Location: ' . $station_location . '</span><br> ';
+        // }
 
-        if ($delivery_method == "Door") {
+        if ($delivery_method == "Door step delivery") {
 
 
             $sql2 = "SELECT * FROM ordershippingaddress WHERE orderid='$orderid';";
@@ -571,6 +574,7 @@ Below are some useful links to help you get started!.
                 
                 <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">Image</th>
                 <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">Name</th>
+                <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">Size</th>
                 <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">price</th>
                 <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">Quantity</th>
                 <th style="background-color:crimson;color:white;padding:5px;margin-bottom:5px;">Total price</th>
@@ -599,6 +603,7 @@ Below are some useful links to help you get started!.
                 $image = get_item_detail($item_id, 'image1');
                 $name = get_item_detail($item_id, 'name');
                 $price = $row['price'];
+                $size = $row['size'];
                 $howmany = $row['howmany'];
                 $total_price = $price * $howmany;
 
@@ -609,6 +614,7 @@ Below are some useful links to help you get started!.
                 <tr style="margin-top:10px;margin-bottom:10px;">
                 <td><img src="' . $this->website_url_http . '/' . $image . '" style="width:100px;height:100px;"></td>
                 <td>' . $name . '</td>
+                <td>' . $size . '</td>
                 <td><span>N</span>' . number_format($price) . '</td>
                 <td>' . $howmany . '</td>
                 <td><span>N</span>' . number_format($total_price) . '</td>
